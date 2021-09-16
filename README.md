@@ -7,7 +7,7 @@ update 1.0 -
   added everything basically
 }
 
-TO DO:
+##TO DO:
 finish bismuth tools
 make more dev stuff (qubop, unbocing, maybe geo idfk?)
 get summons working
