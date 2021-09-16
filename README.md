@@ -3,11 +3,10 @@ mod im making for 1.4 alpha
 
 
 update 1.0 -
-{
-  added everything basically
-}
 
-##TO DO:
+ * added everything basically
+
+# TO DO:
  * finish bismuth tools
  * make more dev stuff (qubop, unbocing, maybe geo idfk?)
  * get summons working
