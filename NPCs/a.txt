@@ -1,0 +1,16 @@
+				var num627 = 12f;
+				var vector71 = new Vector2(NPC.position.X + NPC.width * 0.5f, NPC.position.Y + NPC.height / 2);
+				var num628 = 100;
+				int num700 = ProjectileID.CursedFlameHostile;
+				//Terraria.Audio.SoundEngine.PlaySound(SoundID., (int)NPC.position.X, (int)NPC.position.Y, 33);
+				var num630 = (float)Math.Atan2(vector71.Y - (Main.player[NPC.target].position.Y + Main.player[NPC.target].height * 0.5f), vector71.X - (Main.player[NPC.target].position.X + Main.player[NPC.target].width * 0.5f));
+				for (var num631 = 0f; num631 <= 4f; num631 += 0.4f)
+				{
+					var num635 = Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), vector71.X, vector71.Y, (float)(Math.Cos(num630 + num631) * num627 * -1.0), (float)(Math.Sin(num630 + num631) * num627 * -1.0), num700, num628, 0f, 0, 0f, 0f);
+					Main.projectile[num635].timeLeft = 600;
+					Main.projectile[num635].tileCollide = false;
+					num635 = Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), vector71.X, vector71.Y, (float)(Math.Cos(num630 - num631) * num627 * -1.0), (float)(Math.Sin(num630 - num631) * num627 * -1.0), num700, num628, 0f, 0, 0f, 0f);
+					Main.projectile[num635].timeLeft = 600;
+					Main.projectile[num635].tileCollide = false;
+				}
+				AI_Timer = 0f;
