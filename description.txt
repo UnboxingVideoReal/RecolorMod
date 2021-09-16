@@ -1,0 +1,11 @@
+this mod adds stuff
+
+more specifically:
+
+3 rarities
+1 wall
+11 tiles
+15 projectiles
+8 enemies
+31 items
+1 unfinished biome

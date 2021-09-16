@@ -1,0 +1,3 @@
+displayName = Recolor Mod
+author = Unboxing
+version = 0.1
