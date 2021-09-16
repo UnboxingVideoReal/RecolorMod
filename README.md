@@ -8,12 +8,12 @@ update 1.0 -
 }
 
 ##TO DO:
-finish bismuth tools
-make more dev stuff (qubop, unbocing, maybe geo idfk?)
-get summons working
-chromium (pre-hm, post-eow/boc ore spawns in jungle)
-more enchantments
-expand ice, maybe altish to chlorophyte? (totally not ferozium)
+ * finish bismuth tools
+ * make more dev stuff (qubop, unbocing, maybe geo idfk?)
+ * get summons working
+ * chromium (pre-hm, post-eow/boc ore spawns in jungle)
+ * more enchantments
+ * expand ice, maybe altish to chlorophyte? (totally not ferozium)
 
 
 
