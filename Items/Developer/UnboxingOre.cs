@@ -25,8 +25,8 @@ namespace RecolorMod.Items.Developer
 			Item.consumable = true;
 			Item.rare = ModContent.RarityType<Rarities.Developer>();
 			Item.createTile = ModContent.TileType<Tiles.Developer.UnboxingOre>();
-			Item.width = 12;
-			Item.height = 12;
+			Item.width = 14;
+			Item.height = 16;
 			Item.value = Item.buyPrice(50, 1, 500, 900);
 		}
 

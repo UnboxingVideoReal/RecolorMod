@@ -25,8 +25,8 @@ namespace RecolorMod.Items
 			Item.consumable = true;
 			Item.rare = ItemRarityID.Expert/*ModContent.RarityType<Rarities.UltraBlueRarity>()*/;
 			Item.createTile = ModContent.TileType<Tiles.Huetite>();
-			Item.width = 12;
-			Item.height = 12;
+			Item.width = 16;
+			Item.height = 16;
 			Item.value = 3000;
 		}
 
