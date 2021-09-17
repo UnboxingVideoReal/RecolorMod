@@ -32,9 +32,9 @@ namespace RecolorMod.Items
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
 		public override void AddRecipes() {
 			CreateRecipe(10)
-								//.AddIngredient<HuetiteBar>(10)
+								.AddIngredient<HuetiteBar>(10)
 												.AddIngredient<BismuthBar>(10)
-				.AddIngredient<HuetiteBar>(10)
+				//.AddIngredient<UnboxingBar>(10)
 				.AddIngredient<Aquamarine>(5)
 				.AddTile<Tiles.BismuthForge>()
 				.Register();
