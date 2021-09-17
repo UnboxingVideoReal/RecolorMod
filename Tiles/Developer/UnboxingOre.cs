@@ -8,7 +8,7 @@ using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
-namespace RecolorMod.Tiles
+namespace RecolorMod.Tiles.Developer
 {
 	public class UnboxingOre : ModTile
 	{
@@ -27,7 +27,7 @@ namespace RecolorMod.Tiles
 			AddMapEntry(new Color(0, 0, 0), name);
 
 			DustType = DustID.Asphalt;
-			//ItemDrop = ModContent.ItemType<Items.Huetite>();
+			ItemDrop = ModContent.ItemType<Items.Developer.UnboxingOre>();
 			SoundType = SoundID.Tink;
 			SoundStyle = 1;
             MineResist = 15f;

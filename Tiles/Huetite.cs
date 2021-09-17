@@ -27,7 +27,7 @@ namespace RecolorMod.Tiles
 			AddMapEntry(Main.DiscoColor, name);
 
 			DustType = DustID.Asphalt;
-			//ItemDrop = ModContent.ItemType<Items.Huetite>();
+			ItemDrop = ModContent.ItemType<Items.Huetite>();
 			SoundType = SoundID.Tink;
 			SoundStyle = 1;
             MineResist = 15f;
