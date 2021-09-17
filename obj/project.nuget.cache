@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "xP6X6Y8yRcDLNBOQMbbb2dmOQvN+D2F/u+aUD+Pqy5ufJuKz3RJWNiiuTcvgykLnhuCZVcy/2ve6kQ0o9z3UDA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\astra\\Documents\\My Games\\Terraria\\ModLoader\\Beta\\Mod Sources\\RecolorMod\\RecolorMod.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\astra\\.nuget\\packages\\tmodloader.codeassist\\0.1.3\\tmodloader.codeassist.0.1.3.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -79,7 +79,7 @@ namespace RecolorMod
             );
         }
 
-        public static void RainbowTile(int i, int j, string texturePath, string texturePathDirt)
+        public static void ColorTile(int i, int j, string texturePath, string texturePathDirt, Color color)
         {
             Tile tile = Main.tile[i, j];
             Texture2D texture;
@@ -96,7 +96,7 @@ namespace RecolorMod
             {
                 zero = Vector2.Zero;
             }
-            Main.spriteBatch.Draw(texture, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, 16), new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB), 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(texture, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, 16), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 
             Texture2D texture2 = ModContent.Request<Texture2D>(texturePathDirt).Value;
             Main.spriteBatch.Draw(texture2, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, 16), Color.White, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);

@@ -10,12 +10,12 @@ using Terraria.WorldBuilding;
 
 namespace RecolorMod.Tiles
 {
-	public class Huetite : ModTile
+	public class UnboxingOre : ModTile
 	{
 		public override void SetStaticDefaults() {
 			TileID.Sets.Ore[Type] = true;
 			Main.tileSpelunker[Type] = true; // The tile will be affected by spelunker highlighting
-			Main.tileOreFinderPriority[Type] = 450; // Metal Detector value, see https://terraria.gamepedia.com/Metal_Detector
+			Main.tileOreFinderPriority[Type] = 600; // Metal Detector value, see https://terraria.gamepedia.com/Metal_Detector
 			Main.tileShine2[Type] = true; // Modifies the draw color slightly.
 /*			Main.tileShine[Type] = 975; */// How often tiny dust appear off this tile. Larger is less frequently
 			Main.tileMergeDirt[Type] = true;
@@ -23,8 +23,8 @@ namespace RecolorMod.Tiles
 			Main.tileBlockLight[Type] = true;
 
 			ModTranslation name = CreateMapEntryName();
-			name.SetDefault("Huetite");
-			AddMapEntry(Main.DiscoColor, name);
+			name.SetDefault("Unboxite");
+			AddMapEntry(new Color(0, 0, 0), name);
 
 			DustType = DustID.Asphalt;
 			//ItemDrop = ModContent.ItemType<Items.Huetite>();
@@ -35,7 +35,7 @@ namespace RecolorMod.Tiles
         }
         public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
         {
-			RecolorUtils.ColorTile(i, j, "RecolorMod/Tiles/Huetite", "RecolorMod/Tiles/Huetite_Dirt", new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB));
+			RecolorUtils.ColorTile(i, j, "RecolorMod/Tiles/Developer/UnboxingOre", "RecolorMod/Tiles/Developer/UnboxingOre_Dirt", new Color(Main.DiscoR, 0, Main.DiscoB));
    //         Tile tile = Main.tile[i, j];
    //         Texture2D texture;
    //         //if (Main.canDrawColorTile(i, j))
