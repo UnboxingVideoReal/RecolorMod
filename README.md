@@ -8,7 +8,7 @@ update 1.0 -
 
 # TO DO:
  * finish bismuth tools
- * make more dev stuff (qubop, unbocing, maybe geo idfk?)
+ * make more dev stuff
  * get summons working
  * chromium (pre-hm, post-eow/boc ore spawns in jungle)
  * more enchantments
