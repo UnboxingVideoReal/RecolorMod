@@ -44,18 +44,20 @@ namespace RecolorMod.Items.Developer
 				.Register();
 		}
 
-		public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+		public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
 		{
 			Item.color = new Color(Main.DiscoR, 0, Main.DiscoB);
 			Texture2D texture = ModContent.Request<Texture2D>("RecolorMod/Items/Developer/UnboxingBar_Animated").Value;
 			spriteBatch.Draw(texture, position, GetCurrentFrame(Item, frame: ref this.frame, frameCounter: ref frameCounter, frameDelay: 6, frameAmt: 6), Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
+			return false;
 		}
 
-		public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+		public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
 		{
 			Item.color = new Color(Main.DiscoR, 0, Main.DiscoB);
 			Texture2D texture = ModContent.Request<Texture2D>("RecolorMod/Items/Developer/UnboxingBar_Animated").Value;
 			spriteBatch.Draw(texture, Item.position - Main.screenPosition, GetCurrentFrame(Item, frame: ref frame, frameCounter: ref frameCounter, frameDelay: 6, frameAmt: 6), lightColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+			return false;
 		}
 
 		public static Rectangle GetCurrentFrame(Item item, ref int frame, ref int frameCounter, int frameDelay, int frameAmt, bool frameCounterUp = true)
