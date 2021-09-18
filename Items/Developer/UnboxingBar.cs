@@ -10,9 +10,6 @@ namespace RecolorMod.Items.Developer
 {
 	public class UnboxingBar : ModItem
 	{
-		public int frameCounter;
-
-		public int frame;
 
 		public override void SetStaticDefaults() {
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
@@ -38,40 +35,20 @@ namespace RecolorMod.Items.Developer
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
 		public override void AddRecipes() {
 			CreateRecipe()
-				.AddIngredient<UnboxingOre>(10)
+				.AddIngredient<UnboxingOre>(25)
 				.AddIngredient<Aquamarine>(15)
 				.AddTile<Tiles.BismuthForge>()
 				.Register();
 		}
 
-		public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+		public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
 		{
 			Item.color = new Color(Main.DiscoR, 0, Main.DiscoB);
-			Texture2D texture = ModContent.Request<Texture2D>("RecolorMod/Items/Developer/UnboxingBar_Animated").Value;
-			spriteBatch.Draw(texture, position, GetCurrentFrame(Item, frame: ref this.frame, frameCounter: ref frameCounter, frameDelay: 6, frameAmt: 6), Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
-			return false;
 		}
 
-		public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+		public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 		{
 			Item.color = new Color(Main.DiscoR, 0, Main.DiscoB);
-			Texture2D texture = ModContent.Request<Texture2D>("RecolorMod/Items/Developer/UnboxingBar_Animated").Value;
-			spriteBatch.Draw(texture, Item.position - Main.screenPosition, GetCurrentFrame(Item, frame: ref frame, frameCounter: ref frameCounter, frameDelay: 6, frameAmt: 6), lightColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-			return false;
-		}
-
-		public static Rectangle GetCurrentFrame(Item item, ref int frame, ref int frameCounter, int frameDelay, int frameAmt, bool frameCounterUp = true)
-		{
-			if (frameCounter >= frameDelay)
-			{
-				frameCounter = -1;
-				frame = ((frame != frameAmt - 1) ? (frame + 1) : 0);
-			}
-			if (frameCounterUp)
-			{
-				frameCounter++;
-			}
-			return new Rectangle(0, item.height * frame, item.width, item.height);
 		}
 	}
 }
