@@ -10,9 +10,13 @@ namespace RecolorMod.Items.Developer
 {
 	public class UnboxingBar : ModItem
 	{
+		public int frameCounter;
+
+		public int frame;
+
 		public override void SetStaticDefaults() {
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
-			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(8, 8));
+			//Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(8, 8));
 			ItemID.Sets.SortingPriorityMaterials[Item.type] = 100; // Influences the inventory sort order. 59 is PlatinumBar, higher is more valuable.
 		}
 
@@ -43,11 +47,29 @@ namespace RecolorMod.Items.Developer
 		public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
 		{
 			Item.color = new Color(Main.DiscoR, 0, Main.DiscoB);
+			Texture2D texture = ModContent.Request<Texture2D>("RecolorMod/Items/Developer/UnboxingBar_Animated").Value;
+			spriteBatch.Draw(texture, position, GetCurrentFrame(Item, frame: ref this.frame, frameCounter: ref frameCounter, frameDelay: 6, frameAmt: 6), Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
 		}
 
 		public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 		{
 			Item.color = new Color(Main.DiscoR, 0, Main.DiscoB);
+			Texture2D texture = ModContent.Request<Texture2D>("RecolorMod/Items/Developer/UnboxingBar_Animated").Value;
+			spriteBatch.Draw(texture, Item.position - Main.screenPosition, GetCurrentFrame(Item, frame: ref frame, frameCounter: ref frameCounter, frameDelay: 6, frameAmt: 6), lightColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+		}
+
+		public static Rectangle GetCurrentFrame(Item item, ref int frame, ref int frameCounter, int frameDelay, int frameAmt, bool frameCounterUp = true)
+		{
+			if (frameCounter >= frameDelay)
+			{
+				frameCounter = -1;
+				frame = ((frame != frameAmt - 1) ? (frame + 1) : 0);
+			}
+			if (frameCounterUp)
+			{
+				frameCounter++;
+			}
+			return new Rectangle(0, item.height * frame, item.width, item.height);
 		}
 	}
 }
