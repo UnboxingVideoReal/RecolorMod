@@ -10,7 +10,7 @@ namespace RecolorMod.Items.Developer
 	public class UnboxingOre : ModItem
 	{
 		public override void SetStaticDefaults() {
-			DisplayName.SetDefault("Unboxing Ore");
+			DisplayName.SetDefault("Unboxite Ore");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
 			ItemID.Sets.SortingPriorityMaterials[Item.type] = 58;
 		}

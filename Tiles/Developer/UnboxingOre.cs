@@ -31,7 +31,7 @@ namespace RecolorMod.Tiles.Developer
 			SoundType = SoundID.Tink;
 			SoundStyle = 1;
             MineResist = 15f;
-            MinPick = 410;
+            MinPick = 1015;
         }
         public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
         {

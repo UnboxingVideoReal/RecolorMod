@@ -13,6 +13,7 @@ namespace RecolorMod.Items.Developer
 
 		public override void SetStaticDefaults() {
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
+			DisplayName.SetDefault("Unboxite Bar");
 			//Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(8, 8));
 			ItemID.Sets.SortingPriorityMaterials[Item.type] = 100; // Influences the inventory sort order. 59 is PlatinumBar, higher is more valuable.
 		}
