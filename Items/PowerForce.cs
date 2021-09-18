@@ -116,7 +116,7 @@ $"'amongla swag'");
 			spriteBatch.Draw
 			(
 				texture,
-				new Rectangle(0, 0, texture.Width, texture.Height),
+				new Rectangle((int)Item.VisualPosition.X, (int)Item.VisualPosition.Y, texture.Width, texture.Height),
 				lightColor
 			);
 
