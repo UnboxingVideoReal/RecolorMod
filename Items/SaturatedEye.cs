@@ -23,4 +23,16 @@ using RecolorMod.Common.Systems;
 			    NPC.SpawnOnPlayer(player.whoAmI, ModContent.NPCType<NPCs.Hueshifter>());
 			    SoundEngine.PlaySound(SoundID.Roar, player.position, 0);
 				return true;
-			//}        }    }}
+			//}        }
+
+		public override void AddRecipes()
+		{
+			CreateRecipe()
+				.AddIngredient<ColoriteBar>(5)
+				.AddIngredient<SoulOfHeat>(15)
+				.AddIngredient(ItemID.LunarBar, 5)
+				.AddIngredient(ItemID.SoulofSight, 150)
+				.AddTile<Tiles.BismuthForge>()
+				.Register();
+		}
+	}}

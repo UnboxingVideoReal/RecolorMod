@@ -20,12 +20,12 @@ namespace RecolorMod.Items
 			Item.DamageType = DamageClass.Throwing;
 		}
 
-		public override void AddRecipes() 
-		{
-			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ItemID.GoldBar, 1);
-			recipe.AddTile(TileID.Anvils);
-			recipe.Register();
-		}
+		//public override void AddRecipes() 
+		//{
+		//	Recipe recipe = CreateRecipe();
+		//	recipe.AddIngredient(ItemID.GoldBar, 1);
+		//	recipe.AddTile(TileID.Anvils);
+		//	recipe.Register();
+		//}
 	}
 }

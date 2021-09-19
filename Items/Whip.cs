@@ -13,7 +13,7 @@ using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace QwertyMod.Content.Items.Weapon.Whip
+namespace RecolorMod.Items
 {
     public abstract class WhipProjectile : ModProjectile
     {

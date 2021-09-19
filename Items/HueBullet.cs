@@ -30,13 +30,14 @@ namespace RecolorMod.Items
 			Item.ammo = AmmoID.Bullet; // Important. The first Item in an ammo class sets the AmmoID to its type
 		}
 
-		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-		// Here we create recipe for 999/ExampleCustomAmmo stack from 1/ExampleItem
-		//public override void AddRecipes() {
-		//	CreateRecipe(999)
-		//		.AddIngredient<ExampleItem>()
-		//		.AddTile<Tiles.Furniture.ExampleWorkbench>()
-		//		.Register();
-		//}
-	}
+        // Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
+        // Here we create recipe for 999/ExampleCustomAmmo stack from 1/ExampleItem
+        public override void AddRecipes()
+        {
+            CreateRecipe(100)
+                .AddIngredient<HuetiteBar>()
+                .AddTile<Tiles.BismuthForge>()
+                .Register();
+        }
+    }
 }

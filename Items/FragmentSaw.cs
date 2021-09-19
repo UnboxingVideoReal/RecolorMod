@@ -26,12 +26,18 @@ namespace RecolorMod.Items
 			Item.DamageType = DamageClass.Ranged;
 		}
 
-		//public override void AddRecipes() 
-		//{
-		//	Recipe recipe = CreateRecipe();
-		//	recipe.AddIngredient(ItemID.CopperBar, 1);
-		//	recipe.AddTile(TileID.Anvils);
-		//	recipe.Register();
-		//}
+		public override void AddRecipes()
+		{
+			Recipe recipe = CreateRecipe();
+			recipe.AddIngredient(ItemID.FragmentNebula, 150);
+			recipe.AddIngredient(ItemID.FragmentSolar, 150);
+			recipe.AddIngredient(ItemID.FragmentStardust, 150);
+			recipe.AddIngredient(ItemID.FragmentVortex, 150);
+			recipe.AddIngredient(ItemID.LunarBar, 250);
+			recipe.AddIngredient<Items.BismuthBar>(50);
+			recipe.AddIngredient<Items.ColoriteBar>(10);
+			recipe.AddTile<Tiles.BismuthForge>();
+			recipe.Register();
+		}
 	}
 }

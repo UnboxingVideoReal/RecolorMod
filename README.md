@@ -13,6 +13,10 @@ update 1.0 -
  * chromium (pre-hm, post-eow/boc ore spawns in jungle)
  * more enchantments
  * expand ice, maybe altish to chlorophyte? (totally not ferozium)
+ # important to-do list:
+ * get whips working
+ * balance everything
+ * make stuff obtainable
 
 
 
