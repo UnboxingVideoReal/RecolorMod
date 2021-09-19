@@ -34,13 +34,12 @@ namespace RecolorMod.Items
 			CreateRecipe(10)
 								.AddIngredient<HuetiteBar>(10)
 												.AddIngredient<BismuthBar>(10)
-				//.AddIngredient<UnboxingBar>(10)
 				.AddIngredient<Aquamarine>(5)
 				.AddTile<Tiles.BismuthForge>()
 				.Register();
 		}
 
-		public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
 		{
 			Texture2D texture = ModContent.Request<Texture2D>("RecolorMod/Items/ColoriteBar_Hue").Value;
 			spriteBatch.Draw
@@ -51,7 +50,7 @@ namespace RecolorMod.Items
 					Item.position.X - Main.screenPosition.X + Item.width * 0.5f,
 					Item.position.Y - Main.screenPosition.Y + Item.height - texture.Height * 0.5f + 2f
 				),
-				new Rectangle(0, 0, texture.Width, texture.Height),
+				new Rectangle((int)Item.position.X, (int)Item.position.Y, texture.Width, texture.Height),
 				new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB),
 				rotation,
 				texture.Size() * 0.5f,
@@ -59,6 +58,7 @@ namespace RecolorMod.Items
 				SpriteEffects.None,
 				0f
 			);
+			return true;
 		}
 		public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
 		{
@@ -71,7 +71,7 @@ namespace RecolorMod.Items
 					Item.position.X - Main.screenPosition.X + Item.width * 0.5f,
 					Item.position.Y - Main.screenPosition.Y + Item.height - texture.Height * 0.5f + 2f
 				),
-				new Rectangle(0, 0, texture.Width, texture.Height),
+				new Rectangle((int)Item.position.X, (int)Item.position.Y, texture.Width, texture.Height),
 				new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB)
 			);
 			return true;

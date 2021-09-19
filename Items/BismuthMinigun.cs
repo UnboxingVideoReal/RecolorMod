@@ -51,14 +51,10 @@ namespace RecolorMod.Items
 		//}
 
 		// The following method gives this gun a 38% chance to not consume ammo
-		public override bool ConsumeAmmo(Player player) {
-			//actualDamage += 50;
-			//if (actualDamage == 500)
-			//{
-			//	actualDamage = 50;
-			//}
-			return Main.rand.NextFloat() >= 0.75f;
-		}
+		//public override void OnConsumeAmmo(Player player)
+		//{
+		//	[p Main.rand.NextFloat() >= 0.75f;
+		//}
 
 		// The following method makes the gun slightly inaccurate
 		public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
