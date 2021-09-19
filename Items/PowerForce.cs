@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -17,6 +18,7 @@ namespace RecolorMod.Items
 $"[i:{ModContent.ItemType<BismuthEnchant>()}] Summons Bismuth Tool familiars that scale with minion damage\n" +
 //$"[i:{ModContent.ItemType<WaterEnchant>()}] You have an aura of water\n" +
 $"'amongla swag'");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
 
 		public override void ModifyTooltips(List<TooltipLine> tooltips)

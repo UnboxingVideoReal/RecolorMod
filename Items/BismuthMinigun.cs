@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -15,6 +16,7 @@ namespace RecolorMod.Items
 
 		public override void SetStaticDefaults() {
 			Tooltip.SetDefault("Increases your damage by 50 everytime you shoot\nMax of 500");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
 
 		public override void SetDefaults() {

@@ -2,6 +2,7 @@
 using Terraria.ID;
 using RecolorMod;
 using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
 
 namespace RecolorMod.Items
 {
@@ -11,6 +12,7 @@ namespace RecolorMod.Items
 	{
 		public override void SetStaticDefaults() {
 			/*Tooltip.SetDefault("Creates 2 clones of itself when shot");*/ // The Item's description, can be set to whatever you want.
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 999;
 		}
 
 		public override void SetDefaults() {

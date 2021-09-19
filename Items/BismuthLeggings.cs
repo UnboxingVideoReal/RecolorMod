@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
+using Terraria.GameContent.Creative;
 
 namespace RecolorMod.Items
 {
@@ -12,6 +13,7 @@ namespace RecolorMod.Items
 		public override void SetStaticDefaults()
 		{
 			Tooltip.SetDefault("Movement speed increased by 5%\nArmor penetration increased by 5");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
 
 		public override void SetDefaults()

@@ -1,4 +1,5 @@
 using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -9,6 +10,7 @@ namespace RecolorMod.Items
 		public override void SetStaticDefaults() 
 		{
 			DisplayName.SetDefault("Wetwood");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 999;
 		}
 
 		public override void SetDefaults() 

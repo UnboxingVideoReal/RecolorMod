@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Terraria.GameContent.Creative;
 
 namespace RecolorMod.Items
 {
@@ -36,6 +37,7 @@ namespace RecolorMod.Items
 +5 minion slots
 +10% summon damage
 'It's a bit too blue.'");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {

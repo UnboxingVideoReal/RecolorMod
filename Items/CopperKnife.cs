@@ -1,4 +1,5 @@
 using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -10,6 +11,7 @@ namespace RecolorMod.Items
 		{
 			// DisplayName.SetDefault("CopperKnife"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
 			//Tooltip.SetDefault("This is a basic modded sword.");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 999;
 		}
 
 		public override void SetDefaults() 

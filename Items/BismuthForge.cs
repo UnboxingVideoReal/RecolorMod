@@ -17,6 +17,7 @@ namespace RecolorMod.Items
 		{
 			DisplayName.SetDefault("Bismuth Forge");
 			Tooltip.SetDefault("Used to smelt Bismuth ore and other Post-Moon Lord ores\nCan also be used as an Ancient Manipulator");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
 
 		public override void SetDefaults()

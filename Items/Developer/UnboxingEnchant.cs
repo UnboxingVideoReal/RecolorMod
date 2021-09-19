@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Terraria.GameContent.Creative;
 
 namespace RecolorMod.Items.Developer
 {
@@ -56,6 +57,7 @@ Does more stuff too
 [c/ff0000:Does not work with Calamity Mod, Exxo Avalon Origins, or Mod of Redemption]
 Master
 ");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {

@@ -22,6 +22,7 @@
 //        }
 //        public override void SetDefaults()
 //        {
+//            Item.CloneDefaults(ItemID.RainbowWhip);
 //            Item.autoReuse = true;
 //            Item.useStyle = 1;
 //            Item.useTime = Item.useAnimation = 20;
@@ -32,7 +33,7 @@
 //            Item.noMelee = true;
 //            Item.DamageType = DamageClass.Summon;
 //            Item.noUseGraphic = true;
-//            Item.damage = 67;
+//            Item.damage = 167000;
 //            Item.knockBack = 3f;
 //            Item.shootSpeed = 4f;
 //            Item.rare = 7;
@@ -51,19 +52,24 @@
 //    }
 
 
-//    public class UnboxingWhipP : WhipProjectile
+//    public class UnboxingWhipP : ModProjectile
 //    {
 //        public override void SetStaticDefaults()
 //        {
 //            DisplayName.SetDefault("Unboxing's Whip");
 //            //ProjectileID.Sets.IsAWhip[Type] = true;
 //        }
-//        public override void WhipDefaults()
+//        //public override void WhipDefaults()
+//        //{
+//        //    originalColor = RecolorMod.UnboxingColor;
+//        //    whipRangeMultiplier = 10f;
+//        //    fallOff = 0.05f;
+//        //    tag = BuffType<UnboxingTag>();
+//        //}
+
+//        public override void SetDefaults()
 //        {
-//            originalColor = RecolorMod.UnboxingColor;
-//            whipRangeMultiplier = 10f;
-//            fallOff = 0.05f;
-//            tag = BuffType<UnboxingTag>();
+//            Projectile.CloneDefaults(ProjectileID.RainbowWhip);
 //        }
 
 //        public override bool PreDraw(ref Color lightColor)
@@ -72,13 +78,13 @@
 //            return true;
 //        }
 //    }
-//    public class UnboxingTag : ModBuff
-//    {
-//        public override void SetStaticDefaults()
-//        {
-//            DisplayName.SetDefault("Blessed");
-//            Description.SetDefault("Minions will gain many buffs");
-//            Main.debuff[Type] = true;
-//        }
-//    }
+//    //public class UnboxingTag : ModBuff
+//    //{
+//    //    public override void SetStaticDefaults()
+//    //    {
+//    //        DisplayName.SetDefault("Blessed");
+//    //        Description.SetDefault("Minions will gain many buffs");
+//    //        Main.debuff[Type] = true;
+//    //    }
+//    //}
 //}

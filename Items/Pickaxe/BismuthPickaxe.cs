@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -12,7 +13,8 @@ namespace RecolorMod.Items.Pickaxe
 		{
 			DisplayName.SetDefault("Bismuth Pickaxe");
 			Tooltip.SetDefault("Can mine Obscuritium, Saturite, and Huetite\nRight-Click to decrease usetime by 1");
-		}
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+        }
 
 		public override void SetDefaults()
 		{
