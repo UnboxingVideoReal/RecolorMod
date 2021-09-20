@@ -18,7 +18,7 @@ namespace RecolorMod.Dedicated.Items
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Quibop's Knife");
-            Tooltip.SetDefault("Critical Chance increased by 100\nRight-Click to shoot a barrage of knives\nNormal swings have a chance to throw a knife");
+            Tooltip.SetDefault("Critical Chance increased by 100\nRight-Click to shoot a barrage of knives");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -81,16 +81,19 @@ namespace RecolorMod.Dedicated.Items
                     Projectile.NewProjectile(source, position.X, position.Y, num195, num196, ModContent.ProjectileType<QuibKnife>(), damage, knockback, player.whoAmI, 0, 0f);
                 }
             }
-            if (Main.rand.Next(5) == 0)
-            {
-                int choice = ModContent.ProjectileType<QuibKnife>();
-                Projectile.NewProjectile(source, position.X, position.Y, velocity.X, velocity.Y, choice, damage, knockback, player.whoAmI, 0, 0f);
-            }
+            //else
+            //{
+            //    if (Main.rand.Next(10) == 0)
+            //    {
+            //        Projectile.NewProjectile(source, position.X, position.Y, velocity.X, velocity.Y, ModContent.ProjectileType<QuibKnife>(), damage, knockback, player.whoAmI, 0, 0f);
+            //    }
+            //}
             return false;
         }
 
         public override bool CanUseItem(Player player)
         {
+            QuibopKnife knife = new QuibopKnife();
             if (player.altFunctionUse == 2)
             {
                 Item.shootSpeed = 15f;
