@@ -115,7 +115,7 @@ namespace RecolorMod.Dedicated.Items
         {
             Projectile.width = 16;
             Projectile.height = 16;
-            Projectile.aiStyle = 1;
+            Projectile.aiStyle = -1;
             Projectile.alpha = 0;
             Projectile.DamageType = DamageClass.Generic;
             Projectile.penetrate = 50;
@@ -124,6 +124,12 @@ namespace RecolorMod.Dedicated.Items
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             target.AddBuff(BuffID.CursedInferno, 200);
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            lightColor = new Color(0.34f + 0.66f * (float)Main.DiscoR / 255f, 255, 0);
+            return base.PreDraw(ref lightColor);
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
