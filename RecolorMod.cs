@@ -13,7 +13,12 @@ namespace RecolorMod
 {
 	public class RecolorMod : Mod
 	{
-		public static Color UnboxingColor = new Color(Main.DiscoR, 0, Main.DiscoB); 
+		public static Color UnboxingColor = new Color(Main.DiscoR, 0, Main.DiscoB);
+		public static RecolorMod ModInstance;
+		public RecolorMod()
+		{
+			ModInstance = this;
+		}
 		public override void Load()
 		{
 			Main.versionNumber = $"Terraria v1.4.1.2\nRecolor Mod v{ModLoader.GetMod("RecolorMod").Version}";

@@ -52,7 +52,17 @@ namespace RecolorMod
             }
         }
 
-
+        public static void DedicatedItemStuff(List<TooltipLine> tooltips)
+        {
+            tooltips.Add(new TooltipLine(RecolorMod.ModInstance, "Dedicated", "Dedicated"));
+            foreach (TooltipLine tooltipLine in tooltips)
+            {
+                if (tooltipLine.mod == "RecolorMod" && tooltipLine.Name == "Dedicated")
+                {
+                    tooltipLine.overrideColor = new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB);
+                }
+            }
+        }
         public static void GenerateOre(int firstThing, int secondThing, int whatIsThis, int whatIsThis2, ushort tileToGenerate)
         {
             WorldGen.OreRunner(firstThing, secondThing, whatIsThis, whatIsThis2, tileToGenerate);
