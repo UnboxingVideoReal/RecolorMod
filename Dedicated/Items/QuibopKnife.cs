@@ -39,7 +39,7 @@ namespace RecolorMod.Dedicated.Items
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 10f;
             Item.value = Item.buyPrice(1, 95);
-            Item.rare = ModContent.RarityType<Quibop>();
+            Item.rare = ModContent.RarityType<Rarities.CoolBlue>();
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
         }
@@ -57,10 +57,6 @@ namespace RecolorMod.Dedicated.Items
                 .AddIngredient(ItemID.ThrowingKnife, 500)
                 .AddTile<Tiles.BismuthForge>()
                 .Register();
-        }
-        public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
-        {
-            Item.color = new Color(0.34f + 0.66f * (float)Main.DiscoR / 255f, 255, 0);
         }
 
         public override bool AltFunctionUse(Player player)
@@ -106,11 +102,6 @@ namespace RecolorMod.Dedicated.Items
             }
             return base.CanUseItem(player);
         }
-
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
-        {
-            Item.color = new Color(0.34f + 0.66f * (float)Main.DiscoR / 255f, 255, 0);
-        }
     }
 
     public class QuibKnife : ModProjectile
@@ -132,12 +123,6 @@ namespace RecolorMod.Dedicated.Items
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             target.AddBuff(BuffID.CursedInferno, 200);
-        }
-
-        public override bool PreDraw(ref Color lightColor)
-        {
-            lightColor = new Color(0.34f + 0.66f * (float)Main.DiscoR / 255f, 255, 0);
-            return base.PreDraw(ref lightColor);
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
