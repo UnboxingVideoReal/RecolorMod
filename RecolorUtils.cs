@@ -11,6 +11,7 @@ using Terraria.Localization;
 using Microsoft.Xna.Framework.Graphics;
 using RecolorMod.Items.Developer;
 using Terraria.Audio;
+using Terraria.Graphics.Shaders;
 
 namespace RecolorMod
 {
@@ -36,6 +37,21 @@ namespace RecolorMod
             return (int)(seconds * 60f);
         }
 
+        public static bool FargosColorThing(DrawableTooltipLine line, ref int yOffset, Color useColor, Color colorSecondary, Color color2thing, string mod, string Name)
+        {
+            if (line.mod == mod && line.Name == Name)
+            {
+                Main.spriteBatch.End(); //end and begin main.spritebatch to apply a shader
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, Main.UIScaleMatrix);
+                var lineshader = GameShaders.Misc["PulseCircle"].UseColor(useColor).UseSecondaryColor(colorSecondary);
+                lineshader.Apply(null);
+                Utils.DrawBorderString(Main.spriteBatch, line.text, new Vector2(line.X, line.Y), color2thing, 1); //draw the tooltip manually
+                Main.spriteBatch.End(); //then end and begin again to make remaining tooltip lines draw in the default way
+                Main.spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Main.UIScaleMatrix);
+                return false;
+            }
+            return true;
+        }
         public static void Inflict246DebuffsNPC(NPC target, int buff, float timeBase = 2f)
         {
             if (Utils.NextBool(Main.rand, 4))

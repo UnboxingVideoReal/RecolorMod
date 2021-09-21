@@ -13,4 +13,9 @@ namespace RecolorMod.Dedicated
 	{
 		public override Color RarityColor => new Color(0.34f + 0.66f * (float)Main.DiscoR / 255f, 255, 0);
 	}
+
+	public class Blah : ModRarity
+	{
+		public override Color RarityColor => new Color(0.34f + 0.66f * (float)Main.DiscoR / 255f, 255, 0);
+	}
 }

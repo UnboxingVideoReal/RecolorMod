@@ -18,6 +18,12 @@ namespace RecolorMod.Items.Developer
 			ItemID.Sets.SortingPriorityMaterials[Item.type] = 100; // Influences the inventory sort order. 59 is PlatinumBar, higher is more valuable.
 		}
 
+		//public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+		//{
+		//	RecolorUtils.FargosColorThing(line, ref yOffset, new Color(Main.DiscoR, 0, Main.DiscoB), new Color(Main.DiscoR, 0, Main.DiscoB), new Color(Main.DiscoR, 0, Main.DiscoB), "Terraria", "ItemName");
+		//	return true;
+		//}
+
 		public override void SetDefaults() {
 			Item.width = 30;
 			Item.height = 24;

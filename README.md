@@ -8,7 +8,7 @@ update 1.0 -
 
 # TO DO:
  * finish bismuth tools
- * make more dev stuff
+ * make more dev/dedicated stuff
  * get summons working
  * chromium (pre-hm, post-eow/boc ore spawns in jungle)
  * more enchantments
