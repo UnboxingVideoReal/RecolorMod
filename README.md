@@ -1,4 +1,6 @@
-# RecolorMod
+discord: https://discord.com/invite/VCpCCnXEFf
+
+# Recolor Mod
 mod im making for 1.4 alpha
 
 
