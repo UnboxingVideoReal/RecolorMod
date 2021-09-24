@@ -34,7 +34,7 @@ namespace RecolorMod.Items{	public class SaturatedEye : ModItem	{		public ov
 				.AddIngredient<SoulOfHeat>(15)
 				.AddIngredient(ItemID.LunarBar, 5)
 				.AddIngredient(ItemID.SoulofSight, 150)
-				.AddTile<Tiles.BismuthForge>()
+				.AddTile<Tiles.BismuthForgeTile>()
 				.Register();
 		}
 	}}

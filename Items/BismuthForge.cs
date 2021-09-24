@@ -26,7 +26,7 @@ namespace RecolorMod.Items
 			Item.useTurn = true;
 			Item.maxStack = 99;
 			Item.consumable = true;
-			Item.createTile = ModContent.TileType<Tiles.BismuthForge>();
+			Item.createTile = ModContent.TileType<Tiles.BismuthForgeTile>();
 			Item.rare = 9;
 			Item.width = 48;
 			Item.useTime = 10;

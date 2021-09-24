@@ -52,7 +52,7 @@ $"'amongla swag'");
 				//.AddIngredient<ColorizerEnchant>()
 				.AddIngredient<BismuthEnchant>()
 				//.AddIngredient<WaterEnchant>()
-				.AddTile<Tiles.BismuthForge>()
+				.AddTile<Tiles.BismuthForgeTile>()
 				.Register();
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)

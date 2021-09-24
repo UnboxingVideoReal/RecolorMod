@@ -42,7 +42,7 @@ namespace RecolorMod.Items.Pickaxe
 			CreateRecipe()
 				.AddIngredient<BismuthBar>(35)
 				.AddIngredient<Aquamarine>(15)
-				.AddTile<Tiles.BismuthForge>()
+				.AddTile<Tiles.BismuthForgeTile>()
 				.Register();
 		}
 

@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;using System;using System.Collections.Generic;u
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.addTile(Type);            Main.tileFrameImportant[Type] = true;            Main.tileObsidianKill[Type] = true;            Main.tileShine2[Type] = true;            Main.tileShine[Type] = 500;            Main.tileSpelunker[Type] = true;
             ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Aquamarine");
+            name.SetDefault("AquamarineTile");
             AddMapEntry(Color.Cyan, name);        }
 
         // selects the map entry depending on the frameX

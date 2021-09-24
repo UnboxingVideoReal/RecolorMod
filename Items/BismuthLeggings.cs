@@ -37,7 +37,7 @@ namespace RecolorMod.Items
 			CreateRecipe()
 				.AddIngredient<BismuthBar>(30)
 				.AddIngredient<Aquamarine>(5)
-				.AddTile<Tiles.BismuthForge>()
+				.AddTile<Tiles.BismuthForgeTile>()
 				.Register();
 		}
 	}

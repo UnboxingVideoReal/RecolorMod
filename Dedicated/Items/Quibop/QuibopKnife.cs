@@ -8,9 +8,10 @@ using RecolorMod.Items.Developer;
 using RecolorMod.Items;
 using System.Collections.Generic;
 using Terraria.DataStructures;
+using RecolorMod.Tiles;
 using System;
 
-namespace RecolorMod.Dedicated.Items
+namespace RecolorMod.Dedicated.Items.Quibop
 {
     public class QuibopKnife : ModItem
     {
@@ -55,7 +56,7 @@ namespace RecolorMod.Dedicated.Items
                 .AddIngredient(ItemID.PsychoKnife)
                 .AddIngredient(ItemID.ShadowFlameKnife)
                 .AddIngredient(ItemID.ThrowingKnife, 500)
-                .AddTile<Tiles.BismuthForge>()
+                .AddTile<BismuthForgeTile>()
                 .Register();
         }
 
@@ -129,7 +130,14 @@ namespace RecolorMod.Dedicated.Items
                 if (Projectile.type == ModContent.ProjectileType<QuibKnife>())
                 {
                     Terraria.Audio.SoundEngine.PlaySound(2, (int)Projectile.position.X, (int)Projectile.position.Y, 10);
-                    Projectile.ai[0] += 1f;
+                var num483 = Dust.NewDust(new Vector2(Projectile.position.X - Projectile.velocity.X * 4f + 2f, Projectile.position.Y + 2f - Projectile.velocity.Y * 4f), 8, 8, DustID.Ebonwood, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, 100, Color.White, 1.5f);
+                Main.dust[num483].velocity *= -0.25f;
+                Main.dust[num483].noGravity = true;
+                num483 = Dust.NewDust(new Vector2(Projectile.position.X - Projectile.velocity.X * 4f + 2f, Projectile.position.Y + 2f - Projectile.velocity.Y * 4f), 8, 8, DustID.Ebonwood, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, 100, Color.White, 1.5f);
+                Main.dust[num483].velocity *= -0.25f;
+                Main.dust[num483].position -= Projectile.velocity * 0.5f;
+                Main.dust[num483].noGravity = false;
+                Projectile.ai[0] += 1f;
                     if (Projectile.ai[0] >= 4f)
                     {
                         Projectile.position += Projectile.velocity;

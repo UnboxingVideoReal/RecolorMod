@@ -6,7 +6,7 @@ using Terraria.ObjectData;
 
 namespace RecolorMod.Tiles
 {
-	public class BismuthForge : ModTile
+	public class BismuthForgeTile : ModTile
 	{
 		public override void SetStaticDefaults() {
 			// Properties

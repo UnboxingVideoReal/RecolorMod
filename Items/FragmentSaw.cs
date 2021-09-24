@@ -38,7 +38,7 @@ namespace RecolorMod.Items
 			recipe.AddIngredient(ItemID.LunarBar, 250);
 			recipe.AddIngredient<Items.BismuthBar>(50);
 			recipe.AddIngredient<Items.ColoriteBar>(10);
-			recipe.AddTile<Tiles.BismuthForge>();
+			recipe.AddTile<Tiles.BismuthForgeTile>();
 			recipe.Register();
 		}
 	}

@@ -32,8 +32,7 @@ namespace RecolorMod.Common.Systems
 			downedWaterBoss = false;
 			downedHueshifter = false;
 		}
-
-		public override TagCompound SaveWorldData() {
+        public override void SaveWorldData(TagCompound tag) {
 			var downed = new List<string>();
 
 			if (downedSaturationBoss) {
@@ -55,9 +54,9 @@ namespace RecolorMod.Common.Systems
 				downed.Add("downedHueshifter");
 			}
 
-			return new TagCompound {
-				["downed"] = downed,
-			};
+			//return new TagCompound {
+			//	["downed"] = downed,
+			//};
 		}
 
 		public override void LoadWorldData(TagCompound tag) {

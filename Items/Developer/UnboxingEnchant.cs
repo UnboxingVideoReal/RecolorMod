@@ -149,7 +149,7 @@ Master
             .AddIngredient<UnboxingEssence>(50)
             .AddIngredient<Items.Aquamarine>(1700)
             .AddIngredient<ColoriteBar>(500)
-            .AddTile<Tiles.BismuthForge>()
+            .AddTile<Tiles.BismuthForgeTile>()
             .Register();
         }
 

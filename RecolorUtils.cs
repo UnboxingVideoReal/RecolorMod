@@ -318,5 +318,39 @@ namespace RecolorMod
             }
             //}
         }
+
+        public static Color ColorSwap(Color firstColor, Color secondColor, float seconds)
+        {
+            float colorMePurple = (float)((Math.Sin((double)((float)Math.PI * 2f / seconds) * (double)Main.GlobalTimeWrappedHourly) + 1.0) * 0.5);
+            return Color.Lerp(firstColor, secondColor, colorMePurple);
+        }
+
+        public static Color MulticolorLerp(float increment, params Color[] colors)
+        {
+            int currentColorIndex = (int)(increment * (float)colors.Length);
+            Color value = colors[currentColorIndex];
+            Color nextColor = colors[(currentColorIndex + 1) % colors.Length];
+            return Color.Lerp(value, nextColor, increment * (float)colors.Length % 1f);
+        }
+
+        //public static Color ThreeColorSwap()
+        //{
+        //    List<Color> colors = new List<Color>
+        //                {
+        //                    new Color(255, 99, 146),
+        //                    new Color(255, 228, 94),
+        //                    new Color(127, 200, 248)
+        //                };
+        //        int colorIndex2 = (int)(Main.GlobalTimeWrappedHourly / 2f % (float)colors.Count);
+        //        Color currentColor = colors[colorIndex2];
+        //        Color nextColor = colors[(colorIndex2 + 1) % colors.Count];
+        //        return Color.Lerp(currentColor, nextColor, (Main.GlobalTimeWrappedHourly % 2f > 1f) ? 1f : (Main.GlobalTimeWrappedHourly % 1f));
+        //}
+
+        //public void DrawItemGlowmaskSingleFrame(SpriteBatch spriteBatch, float rotation, Texture2D glowmaskTexture)
+        //{
+        //    Item item = new Item();
+        //    spriteBatch.Draw(origin: new Vector2((float)glowmaskTexture.Width / 2f, (float)glowmaskTexture.Height / 2f - 2f), texture: glowmaskTexture, position: item.Center - Main.screenPosition, sourceRectangle: null, color: Color.White, rotation: rotation, scale: 1f, effects: SpriteEffects.None, layerDepth: 0f);
+        //}
     }
 }

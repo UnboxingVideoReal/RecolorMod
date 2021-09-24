@@ -38,7 +38,7 @@ namespace RecolorMod.Items
         {
             CreateRecipe(100)
                 .AddIngredient<HuetiteBar>()
-                .AddTile<Tiles.BismuthForge>()
+                .AddTile<Tiles.BismuthForgeTile>()
                 .Register();
         }
     }

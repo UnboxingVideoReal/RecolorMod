@@ -12,11 +12,11 @@ using Terraria.Localization;
 
 namespace RecolorMod.Tiles
 {
-    public class Aquamarine : ModTile
+    public class AquamarineTile : ModTile
     {
         public override void SetStaticDefaults()
         {
-            AddMapEntry(new Color(0, 255, 255), LanguageManager.Instance.GetText("Aquamarine"));
+            AddMapEntry(new Color(0, 255, 255), LanguageManager.Instance.GetText("AquamarineTile"));
             Main.tileSolid[Type] = true;
             Main.tileMergeDirt[Type] = true;
             ItemDrop = ModContent.ItemType<Items.Aquamarine>();
