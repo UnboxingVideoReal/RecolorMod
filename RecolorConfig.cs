@@ -23,6 +23,11 @@ namespace RecolorMod
         [DefaultValue(50)]
         public int bismuthOreStrength;
 
+        [Label("For The Worthy Recolors")]
+        [Tooltip("Replaces some NPCs in For The Worthy.")]
+        [DefaultValue(true)]
+        public bool Recolors;
+
         [Header("Enchantments")]
 
         [Range(0, 100)]

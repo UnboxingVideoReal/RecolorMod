@@ -325,6 +325,21 @@ namespace RecolorMod
             return Color.Lerp(firstColor, secondColor, colorMePurple);
         }
 
+        public static Color QuadColorSwap(Color firstColor, Color secondColor, Color thirdColor, Color fourthColor/*, float seconds*/)
+        {
+            List<Color> colors = new List<Color>
+                        {
+                            firstColor,
+                            secondColor,
+                            thirdColor,
+                            fourthColor
+                        };
+                int colorIndex2 = (int)(Main.GlobalTimeWrappedHourly / 2f % (float)colors.Count);
+                Color currentColor = colors[colorIndex2];
+                Color nextColor = colors[(colorIndex2 + 1) % colors.Count];
+            return Color.Lerp(currentColor, nextColor, (Main.GlobalTimeWrappedHourly % 2f > 1f) ? 1f : (Main.GlobalTimeWrappedHourly % 1f));
+        }
+
         public static Color MulticolorLerp(float increment, params Color[] colors)
         {
             int currentColorIndex = (int)(increment * (float)colors.Length);

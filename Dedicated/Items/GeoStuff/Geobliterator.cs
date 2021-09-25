@@ -54,7 +54,7 @@ namespace RecolorMod.Dedicated.Items.GeoStuff
             CreateRecipe()
                 .AddIngredient<UnboxingBar>(50)
                 .AddIngredient(ItemID.SuperStarCannon)
-                .AddIngredient(ItemID.FragmentVortex, 500)
+                .AddIngredient<OmegaFragment>(500)
                 .AddIngredient(ItemID.VortexBeater)
                 .AddIngredient(ItemID.Celeb2)
                 .AddIngredient(ItemID.LaserMachinegun)
@@ -106,7 +106,7 @@ namespace RecolorMod.Dedicated.Items.GeoStuff
             Projectile.width = 2; // The width of Projectile hitbox
             Projectile.height = 20; // The height of Projectile hitbox
 
-            Projectile.aiStyle = ProjectileID.BulletHighVelocity; // The ai style of the Projectile (0 means custom AI). For more please reference the source code of Terraria
+            Projectile.aiStyle = ProjectileID.MoonlordBullet; // The ai style of the Projectile (0 means custom AI). For more please reference the source code of Terraria
             Projectile.DamageType = ModContent.GetInstance<DedicatedClass>(); // What type of damage does this Projectile affect?
             Projectile.friendly = true; // Can the Projectile deal damage to enemies?
             Projectile.hostile = false; // Can the Projectile deal damage to the player?
@@ -114,7 +114,7 @@ namespace RecolorMod.Dedicated.Items.GeoStuff
             Projectile.light = 1f; // How much light emit around the Projectile
             Projectile.tileCollide = false; // Can the Projectile collide with tiles?
             Projectile.timeLeft = 600; //The live time for the Projectile (60 = 1 second, so 600 is 10 seconds)
-            AIType = ProjectileID.BulletHighVelocity;
+            AIType = ProjectileID.MoonlordBullet;
         }
         public override void AI()
         {

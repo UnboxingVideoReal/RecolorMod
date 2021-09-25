@@ -49,7 +49,7 @@ namespace RecolorMod.Dedicated.Items.QuibopStuff
         {
             CreateRecipe()
                 .AddIngredient<UnboxingBar>(50)
-                .AddIngredient<Aquamarine>(100)
+                .AddIngredient<OmegaFragment>(100)
                 .AddIngredient(ItemID.ChainKnife)
                 .AddIngredient(ItemID.FlyingKnife)
                 .AddIngredient(ItemID.PoisonedKnife, 500)

@@ -43,8 +43,8 @@ namespace RecolorMod.Dedicated.Items.TorraStuff
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.Star, 500)
-                .AddIngredient(ItemID.FragmentVortex, 500)
+                .AddIngredient(ItemID.FallenStar, 500)
+                .AddIngredient<OmegaFragment>(500)
                 .AddIngredient<UnboxingBar>(100)
                 .AddIngredient(ItemID.CorruptionKey)
                 .AddIngredient(ItemID.CosmicCarKey)
