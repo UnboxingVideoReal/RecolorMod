@@ -11,7 +11,7 @@ using Terraria.DataStructures;
 using RecolorMod.Tiles;
 using System;
 
-namespace RecolorMod.Dedicated.Items.Quibop
+namespace RecolorMod.Dedicated.Items.QuibopStuff
 {
     public class QuibopKnife : ModItem
     {
@@ -31,7 +31,7 @@ namespace RecolorMod.Dedicated.Items.Quibop
         {
             Item.damage = 151000;
             Item.crit += 100;
-            Item.DamageType = DamageClass.Generic;
+            Item.DamageType = ModContent.GetInstance<DedicatedClass>();
             Item.width = 30;
             Item.height = 32;
             Item.useTime = 1;
@@ -117,7 +117,7 @@ namespace RecolorMod.Dedicated.Items.Quibop
             Projectile.height = 16;
             Projectile.aiStyle = -1;
             Projectile.alpha = 0;
-            Projectile.DamageType = DamageClass.Generic;
+            Projectile.DamageType = ModContent.GetInstance<DedicatedClass>();
             Projectile.penetrate = 50;
             Projectile.friendly = true;
         }
@@ -159,17 +159,17 @@ namespace RecolorMod.Dedicated.Items.Quibop
         }
         public override void AI()
         {
-            Projectile.rotation += 0.5f;
             if (Projectile.localAI[1] > 7f)
             {
-                var num483 = Dust.NewDust(new Vector2(Projectile.position.X - Projectile.velocity.X * 4f + 2f, Projectile.position.Y + 2f - Projectile.velocity.Y * 4f), 8, 8, DustID.Stone, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, 100, new Color(0.34f + 0.66f * (float)Main.DiscoR / 255f, 255, 0), 1.5f);
+                var num483 = Dust.NewDust(new Vector2(Projectile.position.X - Projectile.velocity.X * 4f + 2f, Projectile.position.Y + 2f - Projectile.velocity.Y * 4f), 8, 8, DustID.Ebonwood, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, 100, Color.White, 1.5f);
                 Main.dust[num483].velocity *= -0.25f;
                 Main.dust[num483].noGravity = true;
-                num483 = Dust.NewDust(new Vector2(Projectile.position.X - Projectile.velocity.X * 4f + 2f, Projectile.position.Y + 2f - Projectile.velocity.Y * 4f), 8, 8, DustID.Stone, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, 100, new Color(0.34f + 0.66f * (float)Main.DiscoR / 255f, 255, 0), 1.5f);
+                num483 = Dust.NewDust(new Vector2(Projectile.position.X - Projectile.velocity.X * 4f + 2f, Projectile.position.Y + 2f - Projectile.velocity.Y * 4f), 8, 8, DustID.Ebonwood, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, 100, Color.White, 1.5f);
                 Main.dust[num483].velocity *= -0.25f;
                 Main.dust[num483].position -= Projectile.velocity * 0.5f;
                 Main.dust[num483].noGravity = false;
             }
+            Projectile.rotation += 0.5f;
             //Projectile.ai[0] += 1f; // Use a timer to wait 15 ticks before applying gravity.
             //if (Projectile.ai[0] >= 15f)
             //{

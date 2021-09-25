@@ -9,7 +9,7 @@ using RecolorMod.Items.Developer;
 using RecolorMod.Items;
 using RecolorMod.Tiles;
 
-namespace RecolorMod.Dedicated.Items.Blah
+namespace RecolorMod.Dedicated.Items.BlahStuff
 {
     public class BlahItem : ModItem
     {
@@ -29,7 +29,7 @@ namespace RecolorMod.Dedicated.Items.Blah
         {
             Item.damage = 151000;
             Item.crit += 100;
-            Item.DamageType = DamageClass.Generic;
+            Item.DamageType = ModContent.GetInstance<DedicatedClass>();
             Item.width = 30;
             Item.height = 32;
             Item.useTime = 1;

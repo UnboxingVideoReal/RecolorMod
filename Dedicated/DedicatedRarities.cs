@@ -18,4 +18,14 @@ namespace RecolorMod.Dedicated
 	{
 		public override Color RarityColor => RecolorUtils.ColorSwap(new Color(221, 221, 221), new Color(252, 66, 0), 4f);
 	}
+
+	public class Torra : ModRarity
+	{
+		public override Color RarityColor => RecolorUtils.ColorSwap(new Color(0, 15, 40), new Color(255, 255, 0), 4f);
+	}
+
+	public class Geo : ModRarity
+	{
+		public override Color RarityColor => RecolorUtils.ColorSwap(new Color(255, 163, 0), new Color(0, 255, 19), 4f);
+	}
 }

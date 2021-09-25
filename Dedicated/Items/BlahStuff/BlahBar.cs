@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using RecolorMod.Items.Developer;
 using RecolorMod.Items;
 
-namespace RecolorMod.Dedicated.Items.Blah
+namespace RecolorMod.Dedicated.Items.BlahStuff
 {
     public class BlahBar : ModItem
     {
