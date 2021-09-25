@@ -2,10 +2,20 @@ this mod adds stuff
 
 more specifically:
 
-3 rarities
+1 mount
+9 rarities
 1 wall
-11 tiles
-15 projectiles
-8 enemies
-31 items
+13 tiles
+22 projectiles
+10 enemies
+1 new class thing
+2 buffs
+46 items
 1 unfinished biome
+
+credits:
+
+blasfah for blahr sprite (totally
+my brain ig
+everyone with a dedicated item
+calamity, fargo's souls, and qwerty's for some code
