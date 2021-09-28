@@ -33,4 +33,15 @@ namespace RecolorMod.Dedicated
 	{
 		public override Color RarityColor => RecolorUtils.QuadColorSwap(new Color(0, 242, 170), new Color(254, 126, 229), new Color(254, 158, 35), new Color(0, 174, 238)/*, 4f*/);
 	}
+
+	public class TrueDedicated : ModRarity
+	{
+        public override Color RarityColor
+        {
+            get
+            {
+                return RecolorUtils.QuintColorSwap(ModContent.GetInstance<Quibop>().RarityColor, ModContent.GetInstance<Blah>().RarityColor, ModContent.GetInstance<Torra>().RarityColor, ModContent.GetInstance<Geo>().RarityColor, ModContent.GetInstance<Omega>().RarityColor );
+            }
+        }
+    }
 }

@@ -79,6 +79,18 @@ namespace RecolorMod
                 }
             }
         }
+
+        public static void DedicatedItemStuff(List<TooltipLine> tooltips, Color color)
+        {
+            tooltips.Add(new TooltipLine(RecolorMod.ModInstance, "Dedicated", "Dedicated"));
+            foreach (TooltipLine tooltipLine in tooltips)
+            {
+                if (tooltipLine.mod == "RecolorMod" && tooltipLine.Name == "Dedicated")
+                {
+                    tooltipLine.overrideColor = color;
+                }
+            }
+        }
         public static void GenerateOre(int firstThing, int secondThing, int whatIsThis, int whatIsThis2, ushort tileToGenerate)
         {
             WorldGen.OreRunner(firstThing, secondThing, whatIsThis, whatIsThis2, tileToGenerate);
@@ -325,6 +337,12 @@ namespace RecolorMod
             return Color.Lerp(firstColor, secondColor, colorMePurple);
         }
 
+        public static Color MultiColorSwap(Color[] colors, float seconds)
+        {
+            float colorMePurple = (float)((Math.Sin((double)((float)Math.PI * 2f / seconds) * (double)Main.GlobalTimeWrappedHourly) + 1.0) * 0.5);
+            return MulticolorLerp(colorMePurple, colors);
+        }
+
         public static Color QuadColorSwap(Color firstColor, Color secondColor, Color thirdColor, Color fourthColor/*, float seconds*/)
         {
             List<Color> colors = new List<Color>
@@ -337,6 +355,22 @@ namespace RecolorMod
                 int colorIndex2 = (int)(Main.GlobalTimeWrappedHourly / 2f % (float)colors.Count);
                 Color currentColor = colors[colorIndex2];
                 Color nextColor = colors[(colorIndex2 + 1) % colors.Count];
+            return Color.Lerp(currentColor, nextColor, (Main.GlobalTimeWrappedHourly % 2f > 1f) ? 1f : (Main.GlobalTimeWrappedHourly % 1f));
+        }
+
+        public static Color QuintColorSwap(Color firstColor, Color secondColor, Color thirdColor, Color fourthColor, Color fifthColor/*, float seconds*/)
+        {
+            List<Color> colors = new List<Color>
+                        {
+                            firstColor,
+                            secondColor,
+                            thirdColor,
+                            fourthColor,
+                            fifthColor
+                        };
+            int colorIndex2 = (int)(Main.GlobalTimeWrappedHourly / 2f % (float)colors.Count);
+            Color currentColor = colors[colorIndex2];
+            Color nextColor = colors[(colorIndex2 + 1) % colors.Count];
             return Color.Lerp(currentColor, nextColor, (Main.GlobalTimeWrappedHourly % 2f > 1f) ? 1f : (Main.GlobalTimeWrappedHourly % 1f));
         }
 
