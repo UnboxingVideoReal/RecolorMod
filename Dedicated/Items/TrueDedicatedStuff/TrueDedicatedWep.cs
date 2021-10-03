@@ -482,6 +482,10 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 				Terraria.Audio.SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
 			}
 
+			Projectile.rotation += 0.8f;
+			if (++Projectile.localAI[1] > 30 && Projectile.localAI[1] < 120)
+				Projectile.velocity *= 1.03f;
+
 			for (int i = 0; i < 3; i++)
 			{
 				Vector2 offset = new Vector2(0, -20).RotatedBy(Projectile.rotation);
