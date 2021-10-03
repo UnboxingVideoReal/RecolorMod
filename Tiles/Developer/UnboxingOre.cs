@@ -24,7 +24,7 @@ namespace RecolorMod.Tiles.Developer
 
 			ModTranslation name = CreateMapEntryName();
 			name.SetDefault("Unboxite");
-			AddMapEntry(new Color(0, 0, 0), name);
+			AddMapEntry(ModContent.GetInstance<Rarities.Developer>().RarityColor, name);
 
 			DustType = DustID.Asphalt;
 			ItemDrop = ModContent.ItemType<Items.Developer.UnboxingOre>();
@@ -35,7 +35,7 @@ namespace RecolorMod.Tiles.Developer
         }
         public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
         {
-			RecolorUtils.ColorTile(i, j, "RecolorMod/Tiles/Developer/UnboxingOre", "RecolorMod/Tiles/Developer/UnboxingOre_Dirt", new Color(Main.DiscoR, 0, Main.DiscoB));
+			RecolorUtils.ColorTile(i, j, "RecolorMod/Tiles/Developer/UnboxingOre", "RecolorMod/Tiles/Developer/UnboxingOre_Dirt", ModContent.GetInstance<Rarities.Developer>().RarityColor);
    //         Tile tile = Main.tile[i, j];
    //         Texture2D texture;
    //         //if (Main.canDrawColorTile(i, j))

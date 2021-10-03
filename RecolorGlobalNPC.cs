@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RecolorMod.Projectiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace RecolorMod
 	public class RecolorGlobalNPC : GlobalNPC
 	{
         public static int gsInferno;
+        public static int starburn;
         public static string recolorsDirectory = "RecolorMod/NPCs/Recolors/";
 
         public override void OnKill(NPC npc)
@@ -97,6 +99,10 @@ namespace RecolorMod
             {
                 gsInferno--;
             }
+            if (starburn > 0)
+            {
+                starburn--;
+            }
         }
 
         public override void DrawEffects(NPC npc, ref Color drawColor)
@@ -106,6 +112,22 @@ namespace RecolorMod
                 if (Main.rand.Next(5) < 4)
                 {
                     int dust13 = Dust.NewDust(npc.position - new Vector2(2f, 2f), npc.width + 4, npc.height + 4, 173, npc.velocity.X * 0.4f, npc.velocity.Y * 0.4f, 100, default(Color), 1.5f);
+                    Main.dust[dust13].noGravity = true;
+                    Main.dust[dust13].velocity *= 1.2f;
+                    Main.dust[dust13].velocity.Y -= 0.15f;
+                    if (Utils.NextBool(Main.rand, 4))
+                    {
+                        Main.dust[dust13].noGravity = false;
+                        Main.dust[dust13].scale *= 0.5f;
+                    }
+                }
+                Lighting.AddLight(npc.position, 0.1f, 0f, 0.135f);
+            }
+            if (starburn > 0)
+            {
+                if (Main.rand.Next(5) < 4)
+                {
+                    int dust13 = Dust.NewDust(npc.position - new Vector2(2f, 2f), npc.width + 4, npc.height + 4, DustID.YellowStarDust, npc.velocity.X * 0.4f, npc.velocity.Y * 0.4f, 100, default(Color), 1.5f);
                     Main.dust[dust13].noGravity = true;
                     Main.dust[dust13].velocity *= 1.2f;
                     Main.dust[dust13].velocity.Y -= 0.15f;
@@ -138,6 +160,7 @@ namespace RecolorMod
         public override void UpdateLifeRegen(NPC npc, ref int damage)
         {
             ApplyDPSDebuff(gsInferno, 250, 50, ref npc.lifeRegen, ref damage);
+            ApplyDPSDebuff(starburn, 250, 50, ref npc.lifeRegen, ref damage);
         }
 
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
@@ -156,136 +179,137 @@ namespace RecolorMod
             }
         }
 
-        public override void SetDefaults(NPC npc)
-        {
-            LoadSprites(npc);
-        }
+        //public override void SetDefaults(NPC npc)
+        //{
+        //    LoadSprites(npc);
+        //}
 
-        private void LoadSprites(NPC npc)
-        {
-            if (Main.dedServ || Main.netMode == NetmodeID.Server)
-                return;
+        //private void LoadSprites(NPC npc)
+        //{
+        //    if (Main.dedServ || Main.netMode == NetmodeID.Server)
+        //        return;
 
-            bool recolor = ModContent.GetInstance<RecolorConfig>().Recolors && Main.getGoodWorld;
-            if (recolor)
-            {
-                switch (npc.type)
-                {
-                    case NPCID.ServantofCthulhu:
-                        TextureAssets.Npc[5] = ModContent.Request<Texture2D>(GetRecolor("NPC_5"));
-                        break;
-                    case NPCID.EaterofWorldsHead:
-                        TextureAssets.Npc[13] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.EaterofWorldsHead.ToString()));
-                        break;
-                    case NPCID.EaterofWorldsBody:
-                        TextureAssets.Npc[14] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.EaterofWorldsBody.ToString()));
-                        break;
-                    case NPCID.EaterofWorldsTail:
-                        TextureAssets.Npc[15] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.EaterofWorldsTail.ToString()));
-                        break;
-                    case NPCID.Creeper:
-                        TextureAssets.Npc[267] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.Creeper.ToString()));
-                        break;
-                    case NPCID.BrainofCthulhu:
-                        TextureAssets.Npc[266] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.BrainofCthulhu.ToString()));
-                        break;
-                    case NPCID.SkeletronHand:
-                        TextureAssets.Npc[36] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.SkeletronHand.ToString()));
-                        break;
-                    case NPCID.SkeletronHead:
-                        TextureAssets.Npc[35] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.SkeletronHead.ToString()));
-                        TextureAssets.BoneArm = ModContent.Request<Texture2D>(GetRecolor("Arm_Bone"));
-                        break;
-                    case NPCID.WallofFleshEye:
-                        TextureAssets.Npc[114] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.WallofFleshEye.ToString()));
-                        break;
-                    case NPCID.TheHungry:
-                        TextureAssets.Npc[115] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.TheHungry.ToString()));
-                        break;
-                    case NPCID.TheHungryII:
-                        TextureAssets.Npc[116] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.TheHungryII.ToString()));
-                        break;
-                    case NPCID.LeechHead:
-                        TextureAssets.Npc[117] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.LeechHead.ToString()));
-                        break;
-                    case NPCID.LeechBody:
-                        TextureAssets.Npc[118] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.LeechBody.ToString()));
-                        break;
-                    case NPCID.LeechTail:
-                        TextureAssets.Npc[119] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.LeechTail.ToString()));
-                        break;
-                    case NPCID.TheDestroyerBody:
-                    case NPCID.TheDestroyerTail:
-                    case NPCID.WallofFlesh:
-                        TextureAssets.Npc[113] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.WallofFlesh.ToString()));
-                        break;
-                    case NPCID.Probe:
-                    case NPCID.PrimeCannon:
-                    case NPCID.PrimeSaw:
-                    case NPCID.PrimeVice:
-                    case NPCID.PrimeLaser:
-                    case NPCID.PlanterasHook:
-                    case NPCID.PlanterasTentacle:
-                    case NPCID.Spore:
-                    case NPCID.GolemFistLeft:
-                    case NPCID.GolemFistRight:
-                    case NPCID.GolemHead:
-                    case NPCID.GolemHeadFree:
-                    case NPCID.DukeFishron:
-                        TextureAssets.Npc[370] = ModContent.Request<Texture2D>(GetRecolor("NPC_370"));
-                        break;
-                    case NPCID.Sharkron:
-                    case NPCID.Sharkron2:
-                    case NPCID.CultistBossClone:
-                    //case NPCID.MoonLordFreeEye:
-                    //    TextureAssets.Npc[400] = ModContent.Request<Texture2D>(GetRecolor("NPC_400"));
-                    //    break;
-                    //case NPCID.MoonLordHand:
-                    //    TextureAssets.Npc[397] = ModContent.Request<Texture2D>(GetRecolor("NPC_397"));
-                    //    break;
-                    //case NPCID.MoonLordHead:
-                    //    TextureAssets.Npc[396] = ModContent.Request<Texture2D>(GetRecolor("NPC_396"));
-                    //    break;
-                    case NPCID.MoonLordCore:
-                        TextureAssets.Npc[398] = ModContent.Request<Texture2D>(GetRecolor("NPC_398"));
-                        TextureAssets.Extra[13] = ModContent.Request<Texture2D>(GetRecolor("Extra_13"));
-                        TextureAssets.Extra[14] = ModContent.Request<Texture2D>(GetRecolor("Extra_14"));
-                        TextureAssets.Extra[15] = ModContent.Request<Texture2D>(GetRecolor("Extra_15"));
-                        TextureAssets.Extra[16] = ModContent.Request<Texture2D>(GetRecolor("Extra_16"));
-                        TextureAssets.Extra[17] = ModContent.Request<Texture2D>(GetRecolor("Extra_17"));
-                        TextureAssets.Extra[18] = ModContent.Request<Texture2D>(GetRecolor("Extra_18"));
-                        TextureAssets.Extra[19] = ModContent.Request<Texture2D>(GetRecolor("Extra_19"));
-                        TextureAssets.Extra[21] = ModContent.Request<Texture2D>(GetRecolor("Extra_21"));
-                        TextureAssets.Extra[22] = ModContent.Request<Texture2D>(GetRecolor("Extra_22"));
-                        TextureAssets.Extra[23] = ModContent.Request<Texture2D>(GetRecolor("Extra_23"));
-                        TextureAssets.Extra[24] = ModContent.Request<Texture2D>(GetRecolor("Extra_24"));
-                        TextureAssets.Extra[25] = ModContent.Request<Texture2D>(GetRecolor("Extra_25"));
-                        TextureAssets.Extra[26] = ModContent.Request<Texture2D>(GetRecolor("Extra_26"));
-                        TextureAssets.Extra[29] = ModContent.Request<Texture2D>(GetRecolor("Extra_29"));
-                        break;
-                    case NPCID.MoonLordLeechBlob:
-                        TextureAssets.Npc[401] = ModContent.Request<Texture2D>(GetRecolor("NPC_401"));
-                        break;
-                    case NPCID.EyeofCthulhu:
-                        TextureAssets.Npc[4] = ModContent.Request<Texture2D>(recolorsDirectory + "NPC_4");
-                        //Main.npcHeadBossTexture[0] = Mod.GetTexture((recolor ? "NPCs/Resprites/" : "NPCs/Vanilla/") + "NPC_Head_Boss_0");
-                        //Main.npcHeadBossTexture[1] = Mod.GetTexture((recolor ? "NPCs/Resprites/" : "NPCs/Vanilla/") + "NPC_Head_Boss_1");
-                        //TextureAssets.Gore[6] = ModContent.Request<Texture2D>("RecolorMod/NPCs/Recolors/");
-                        //TextureAssets.Gore[7] = Mod.GetTexture((recolor ? "NPCs/Resprites/Gores/" : "NPCs/Vanilla/Gores/") + "Gore_7");
-                        //TextureAssets.Gore[8] = Mod.GetTexture((recolor ? "NPCs/Resprites/Gores/" : "NPCs/Vanilla/Gores/") + "Gore_8");
-                        //TextureAssets.Gore[9] = Mod.GetTexture((recolor ? "NPCs/Resprites/Gores/" : "NPCs/Vanilla/Gores/") + "Gore_9");
-                        //TextureAssets.Gore[10] = Mod.GetTexture((recolor ? "NPCs/Resprites/Gores/" : "NPCs/Vanilla/Gores/") + "Gore_10");
-                        break;
+        //    bool recolor = ModContent.GetInstance<RecolorConfig>().Recolors && Main.getGoodWorld;
+        //    if (recolor)
+        //    {
+        //        switch (npc.type)
+        //        {
+        //            case NPCID.ServantofCthulhu:
+        //                TextureAssets.Npc[5] = ModContent.Request<Texture2D>(GetRecolor("NPC_5"));
+        //                break;
+        //            case NPCID.EaterofWorldsHead:
+        //                TextureAssets.Npc[13] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.EaterofWorldsHead.ToString()));
+        //                break;
+        //            case NPCID.EaterofWorldsBody:
+        //                TextureAssets.Npc[14] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.EaterofWorldsBody.ToString()));
+        //                break;
+        //            case NPCID.EaterofWorldsTail:
+        //                TextureAssets.Npc[15] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.EaterofWorldsTail.ToString()));
+        //                break;
+        //            case NPCID.Creeper:
+        //                TextureAssets.Npc[267] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.Creeper.ToString()));
+        //                break;
+        //            case NPCID.BrainofCthulhu:
+        //                TextureAssets.Npc[266] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.BrainofCthulhu.ToString()));
+        //                break;
+        //            case NPCID.SkeletronHand:
+        //                TextureAssets.Npc[36] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.SkeletronHand.ToString()));
+        //                break;
+        //            case NPCID.SkeletronHead:
+        //                TextureAssets.Npc[35] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.SkeletronHead.ToString()));
+        //                TextureAssets.BoneArm = ModContent.Request<Texture2D>(GetRecolor("Arm_Bone"));
+        //                break;
+        //            case NPCID.WallofFleshEye:
+        //                TextureAssets.Npc[114] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.WallofFleshEye.ToString()));
+        //                break;
+        //            case NPCID.TheHungry:
+        //                TextureAssets.Npc[115] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.TheHungry.ToString()));
+        //                break;
+        //            case NPCID.TheHungryII:
+        //                TextureAssets.Npc[116] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.TheHungryII.ToString()));
+        //                break;
+        //            case NPCID.LeechHead:
+        //                TextureAssets.Npc[117] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.LeechHead.ToString()));
+        //                break;
+        //            case NPCID.LeechBody:
+        //                TextureAssets.Npc[118] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.LeechBody.ToString()));
+        //                break;
+        //            case NPCID.LeechTail:
+        //                TextureAssets.Npc[119] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.LeechTail.ToString()));
+        //                break;
+        //            case NPCID.TheDestroyerBody:
+        //            case NPCID.TheDestroyerTail:
+        //            case NPCID.WallofFlesh:
+        //                TextureAssets.Npc[113] = ModContent.Request<Texture2D>(GetRecolor("NPC_" + NPCID.WallofFlesh.ToString()));
+        //                break;
+        //            case NPCID.Probe:
+        //            case NPCID.PrimeCannon:
+        //            case NPCID.PrimeSaw:
+        //            case NPCID.PrimeVice:
+        //            case NPCID.PrimeLaser:
+        //            case NPCID.PlanterasHook:
+        //            case NPCID.PlanterasTentacle:
+        //            case NPCID.Spore:
+        //            case NPCID.GolemFistLeft:
+        //            case NPCID.GolemFistRight:
+        //            case NPCID.GolemHead:
+        //            case NPCID.GolemHeadFree:
+        //            case NPCID.DukeFishron:
+        //                TextureAssets.Npc[370] = ModContent.Request<Texture2D>(GetRecolor("NPC_370"));
+        //                break;
+        //            case NPCID.Sharkron:
+        //            case NPCID.Sharkron2:
+        //            case NPCID.CultistBossClone:
+        //            //case NPCID.MoonLordFreeEye:
+        //            //    TextureAssets.Npc[400] = ModContent.Request<Texture2D>(GetRecolor("NPC_400"));
+        //            //    break;
+        //            //case NPCID.MoonLordHand:
+        //            //    TextureAssets.Npc[397] = ModContent.Request<Texture2D>(GetRecolor("NPC_397"));
+        //            //    break;
+        //            //case NPCID.MoonLordHead:
+        //            //    TextureAssets.Npc[396] = ModContent.Request<Texture2D>(GetRecolor("NPC_396"));
+        //            //    break;
+        //            case NPCID.MoonLordCore:
+        //                TextureAssets.Npc[400] = ModContent.Request<Texture2D>(GetRecolor("NPC_400"));
+        //                TextureAssets.Npc[401] = ModContent.Request<Texture2D>(GetRecolor("NPC_401"));
+        //                TextureAssets.Npc[397] = ModContent.Request<Texture2D>(GetRecolor("NPC_397"));
+        //                TextureAssets.Npc[396] = ModContent.Request<Texture2D>(GetRecolor("NPC_396"));
+        //                TextureAssets.Npc[398] = ModContent.Request<Texture2D>(GetRecolor("NPC_398"));
+        //                TextureAssets.Extra[13] = ModContent.Request<Texture2D>(GetRecolor("Extra_13"));
+        //                TextureAssets.Extra[14] = ModContent.Request<Texture2D>(GetRecolor("Extra_14"));
+        //                TextureAssets.Extra[15] = ModContent.Request<Texture2D>(GetRecolor("Extra_15"));
+        //                TextureAssets.Extra[16] = ModContent.Request<Texture2D>(GetRecolor("Extra_16"));
+        //                TextureAssets.Extra[17] = ModContent.Request<Texture2D>(GetRecolor("Extra_17"));
+        //                TextureAssets.Extra[18] = ModContent.Request<Texture2D>(GetRecolor("Extra_18"));
+        //                TextureAssets.Extra[19] = ModContent.Request<Texture2D>(GetRecolor("Extra_19"));
+        //                TextureAssets.Extra[21] = ModContent.Request<Texture2D>(GetRecolor("Extra_21"));
+        //                TextureAssets.Extra[22] = ModContent.Request<Texture2D>(GetRecolor("Extra_22"));
+        //                TextureAssets.Extra[23] = ModContent.Request<Texture2D>(GetRecolor("Extra_23"));
+        //                TextureAssets.Extra[24] = ModContent.Request<Texture2D>(GetRecolor("Extra_24"));
+        //                TextureAssets.Extra[25] = ModContent.Request<Texture2D>(GetRecolor("Extra_25"));
+        //                TextureAssets.Extra[26] = ModContent.Request<Texture2D>(GetRecolor("Extra_26"));
+        //                TextureAssets.Extra[29] = ModContent.Request<Texture2D>(GetRecolor("Extra_29"));
+        //                break;
+        //            case NPCID.EyeofCthulhu:
+        //                TextureAssets.Npc[4] = ModContent.Request<Texture2D>(recolorsDirectory + "NPC_4");
+        //                //Main.npcHeadBossTexture[0] = Mod.GetTexture((recolor ? "NPCs/Resprites/" : "NPCs/Vanilla/") + "NPC_Head_Boss_0");
+        //                //Main.npcHeadBossTexture[1] = Mod.GetTexture((recolor ? "NPCs/Resprites/" : "NPCs/Vanilla/") + "NPC_Head_Boss_1");
+        //                //TextureAssets.Gore[6] = ModContent.Request<Texture2D>("RecolorMod/NPCs/Recolors/");
+        //                //TextureAssets.Gore[7] = Mod.GetTexture((recolor ? "NPCs/Resprites/Gores/" : "NPCs/Vanilla/Gores/") + "Gore_7");
+        //                //TextureAssets.Gore[8] = Mod.GetTexture((recolor ? "NPCs/Resprites/Gores/" : "NPCs/Vanilla/Gores/") + "Gore_8");
+        //                //TextureAssets.Gore[9] = Mod.GetTexture((recolor ? "NPCs/Resprites/Gores/" : "NPCs/Vanilla/Gores/") + "Gore_9");
+        //                //TextureAssets.Gore[10] = Mod.GetTexture((recolor ? "NPCs/Resprites/Gores/" : "NPCs/Vanilla/Gores/") + "Gore_10");
+        //                break;
 
-                    default:
-                        break;
-                }
-            }
-        }
+        //            default:
+        //                break;
+        //        }
+        //    }
+        //}
 
-        public string GetRecolor(string thingToReplace)
-        {
-            return recolorsDirectory + thingToReplace;
-        }
+        //public string GetRecolor(string thingToReplace)
+        //{
+        //    return recolorsDirectory + thingToReplace;
+        //}
     }
 }

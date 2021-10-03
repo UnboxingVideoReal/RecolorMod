@@ -14,7 +14,6 @@ namespace RecolorMod
 {
 	public class RecolorMod : Mod
 	{
-		public static Color UnboxingColor = new Color(Main.DiscoR, 0, Main.DiscoB);
 		public static RecolorMod ModInstance;
 		public RecolorMod()
 		{

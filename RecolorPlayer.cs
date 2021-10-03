@@ -22,6 +22,7 @@ namespace RecolorMod
         public bool stopSpawningTheFuckingPets = true; 
         Player player = new Player();
         public bool gsInferno;
+        public bool starburn;
         public bool UnboxingEffectBool;
         public bool BismuthEffectBool;
         public bool PetsActive = true;
@@ -32,6 +33,7 @@ namespace RecolorMod
             playerX = false;
             playerY = false;
             gsInferno = false;
+            starburn = false;
             unboxingEnchInflicts = false;
             UnboxingEffectBool = false;
             BismuthEffectBool = false;
@@ -42,6 +44,7 @@ namespace RecolorMod
         public override void UpdateDead()
         {
             gsInferno = false;
+            starburn = false;
             stopSpawningTheFuckingPets = false;
             doItemStuff = false;
         }

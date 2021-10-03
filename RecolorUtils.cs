@@ -32,6 +32,11 @@ namespace RecolorMod
             }
         }
 
+        public static float GetBulletRotation(Projectile projectile)
+        {
+            return projectile.rotation = (float)Math.Atan2(projectile.velocity.Y, projectile.velocity.X) + 1.57f;
+        }
+
         public static int SecondsToFrames(float seconds)
         {
             return (int)(seconds * 60f);

@@ -50,12 +50,12 @@ namespace RecolorMod.Items.Developer
 
 		public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
 		{
-			Item.color = new Color(Main.DiscoR, 0, Main.DiscoB);
+			Item.color = ModContent.GetInstance<Rarities.Developer>().RarityColor;
 		}
 
 		public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 		{
-			Item.color = new Color(Main.DiscoR, 0, Main.DiscoB);
+			Item.color = ModContent.GetInstance<Rarities.Developer>().RarityColor;
 		}
 	}
 }

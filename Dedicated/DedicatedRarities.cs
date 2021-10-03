@@ -40,7 +40,7 @@ namespace RecolorMod.Dedicated
         {
             get
             {
-                return RecolorUtils.QuintColorSwap(ModContent.GetInstance<Quibop>().RarityColor, ModContent.GetInstance<Blah>().RarityColor, ModContent.GetInstance<Torra>().RarityColor, ModContent.GetInstance<Geo>().RarityColor, ModContent.GetInstance<Omega>().RarityColor );
+                return RecolorUtils.QuintColorSwap(ModContent.GetInstance<Rarities.CoolBlue>().RarityColor, ModContent.GetInstance<Blah>().RarityColor, ModContent.GetInstance<Torra>().RarityColor, ModContent.GetInstance<Geo>().RarityColor, ModContent.GetInstance<Omega>().RarityColor );
             }
         }
     }

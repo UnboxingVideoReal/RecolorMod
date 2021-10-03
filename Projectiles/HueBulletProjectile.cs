@@ -6,8 +6,6 @@ using Terraria.ModLoader;
 
 namespace RecolorMod.Projectiles
 {
-	// This Example show how to implement simple homing Projectile
-	// Can be tested with ExampleCustomAmmoGun
 	public class HueBulletProjectile : ModProjectile
 	{
 		public override void SetStaticDefaults() {

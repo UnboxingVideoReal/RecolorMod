@@ -56,7 +56,7 @@ namespace RecolorMod.Dedicated.Items.BlahStuff
 
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Texture2D glowmaskTexture = ModContent.Request<Texture2D>("RecolorMod/Dedicated/Items/Blah/BlahBar_Glow").Value;
+            Texture2D glowmaskTexture = ModContent.Request<Texture2D>("RecolorMod/Dedicated/Items/BlahStuff/BlahBar_Glow").Value;
             spriteBatch.Draw(origin: new Vector2((float)glowmaskTexture.Width / 2f, (float)glowmaskTexture.Height / 2f - 2f), texture: glowmaskTexture, position: Item.Center - Main.screenPosition, sourceRectangle: null, color: Color.White, rotation: rotation, scale: 1f, effects: SpriteEffects.None, layerDepth: 0f);
         }
     }
