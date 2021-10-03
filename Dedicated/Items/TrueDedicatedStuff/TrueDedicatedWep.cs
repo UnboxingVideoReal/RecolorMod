@@ -481,43 +481,6 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 				Projectile.localAI[0] = 1;
 				Terraria.Audio.SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
 			}
-			if (Projectile.ai[1] == 0)
-			{
-				float rotation = Projectile.velocity.ToRotation();
-				Vector2 vel = Main.npc[(int)Projectile.ai[0]].Center - Projectile.Center;
-				float targetAngle = vel.ToRotation();
-				Projectile.velocity = new Vector2(Projectile.velocity.Length(), 0f).RotatedBy(rotation.AngleLerp(targetAngle, Projectile.localAI[0]));
-
-				if (Projectile.localAI[0] < 0.5f)
-					Projectile.localAI[0] += 1f / 3000f;
-
-				if (vel.Length() < 250 || !Main.player[(int)Projectile.ai[0]].active || Main.player[(int)Projectile.ai[0]].dead || Main.player[(int)Projectile.ai[0]].ghost)
-				{
-					Projectile.ai[1] = 1;
-					Projectile.netUpdate = true;
-					Projectile.timeLeft = 180;
-					Projectile.velocity.Normalize();
-				}
-			}
-			else if (Projectile.ai[1] > 0)
-			{
-				if (++Projectile.ai[1] < 120)
-				{
-					Projectile.velocity *= 1.03f;
-
-					float rotation = Projectile.velocity.ToRotation();
-					Vector2 vel = Main.npc[(int)Projectile.ai[0]].Center - Projectile.Center;
-					float targetAngle = vel.ToRotation();
-					Projectile.velocity = new Vector2(Projectile.velocity.Length(), 0f).RotatedBy(rotation.AngleLerp(targetAngle, 0.025f));
-				}
-			}
-			else //ai1 below 0 rn
-			{
-				Projectile.ai[1]++;
-			}
-			Projectile.rotation += 0.8f;
-			if (++Projectile.localAI[1] > 30 && Projectile.localAI[1] < 120)
-				Projectile.velocity *= 1.03f;
 
 			for (int i = 0; i < 3; i++)
 			{
