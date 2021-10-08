@@ -18,8 +18,8 @@ namespace RecolorMod
     public class RecolorUtils
     {
         Item item = new Item();
+        public static string none = "RecolorMod/None";
         Player player = new Player();
-        public float actualKnockback = 0f;
         public static bool stopTheFuckingSound = true;
 
         public static void PlayAchievementSound()

@@ -29,6 +29,11 @@ namespace RecolorMod.Dedicated
 		public override Color RarityColor => RecolorUtils.ColorSwap(new Color(255, 163, 0), new Color(0, 255, 19), 4f);
 	}
 
+	public class Gunga : ModRarity
+	{
+		public override Color RarityColor => RecolorUtils.ColorSwap(new Color(252, 239, 219), new Color(83, 71, 69), 4f);
+	}
+
 	public class Omega : ModRarity
 	{
 		public override Color RarityColor => RecolorUtils.QuadColorSwap(new Color(0, 242, 170), new Color(254, 126, 229), new Color(254, 158, 35), new Color(0, 174, 238)/*, 4f*/);

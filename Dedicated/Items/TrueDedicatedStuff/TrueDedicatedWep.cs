@@ -10,6 +10,8 @@ using RecolorMod.Tiles;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Terraria.GameContent;
+using System.IO;
 
 namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 {
@@ -28,7 +30,8 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 			tooltips.Add(new TooltipLine(RecolorMod.ModInstance, "QuibopStuff", "Attacks inflict Frostburn\nRight-Click + Up to shoot a barrage of knives"));
 			tooltips.Add(new TooltipLine(RecolorMod.ModInstance, "BlahStuff", "Attacks inflict On Fire!\nRight-Click + Left to summon an Energy Blade"));
 			tooltips.Add(new TooltipLine(RecolorMod.ModInstance, "GeoStuff", "Attacks inflict Electrified\nRight-Click + Right to create a beam of Geo Lasers"));
-			tooltips.Add(new TooltipLine(RecolorMod.ModInstance, "UnboxingStuff", "Attacks inflict a variety of debuffs\nRight-Click to do something idk"));
+			tooltips.Add(new TooltipLine(RecolorMod.ModInstance, "GungaStuff", "Attacks inflict God Slayer Inferno\nRight-Click + Jump to create God Slayer Flamebursts"));
+			tooltips.Add(new TooltipLine(RecolorMod.ModInstance, "UnboxingStuff", "Attacks inflict a variety of debuffs\nRight-Click to blind your enemies (and your computer)"));
 			RecolorUtils.DedicatedItemStuff(tooltips);
 			foreach (TooltipLine tooltipLine in tooltips)
 			{
@@ -51,6 +54,10 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 				if (tooltipLine.mod == "RecolorMod" && tooltipLine.Name == "UnboxingStuff")
 				{
 					tooltipLine.overrideColor = ModContent.GetInstance<Rarities.Developer>().RarityColor;
+				}
+				if (tooltipLine.mod == "RecolorMod" && tooltipLine.Name == "GungaStuff")
+				{
+					tooltipLine.overrideColor = ModContent.GetInstance<Gunga>().RarityColor;
 				}
 			}
 		}
@@ -101,6 +108,11 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 					Item.shoot = ModContent.ProjectileType<StarlightBeam>();
 					Item.useTime = 100;
 				}
+				else if (player.controlJump)
+				{
+					Item.shoot = ModContent.ProjectileType<GodSlayerGigaBlast>();
+					Item.useTime = 5;
+				}
 				else if (player.controlRight)
 				{
 					Item.shoot = ModContent.ProjectileType<GeoBeam>();
@@ -130,7 +142,7 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 			if (player.altFunctionUse == 2) // Right-click
 			{
 				if (player.controlUp)
-                {
+				{
 					for (int num194 = 0; num194 < 8; num194++)
 					{
 						float num195 = velocity.X;
@@ -140,9 +152,20 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 						Projectile.NewProjectile(source, position.X, position.Y, num195, num196, ModContent.ProjectileType<QuibopStuff.QuibKnife>(), damage, knockback, player.whoAmI, 0, 0f);
 					}
 				}
+				else if (player.controlJump)
+				{
+					for (int num194 = 0; num194 < 7; num194++)
+					{
+						float num195 = velocity.X;
+						float num196 = velocity.Y;
+						num195 += (float)Main.rand.Next(-40, 41) * 0.05f;
+						num196 += (float)Main.rand.Next(-40, 41) * 0.05f;
+						Projectile.NewProjectile(source, position.X, position.Y, num195, num196, ModContent.ProjectileType<GodSlayerBarrage>(), damage, knockback, player.whoAmI, 0, 0f);
+					}
+				}
 				else
 				{
-					for (int num194 = 0; num194 < 8; num194++)
+					for (int num194 = 0; num194 < 11; num194++)
 					{
 						float num195 = velocity.X;
 						float num196 = velocity.Y;
@@ -170,6 +193,7 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 				.AddIngredient<GeoStuff.Geobliterator>()
 				.AddIngredient<QuibopStuff.QuibopKnife>()
 				.AddIngredient<TorraStuff.StarKey>()
+				//.AddIngredient<GungaStuff.GunGa>()
 				//.AddIngredient<UnboxingWep>()
 				.AddIngredient<BlahStuff.BlahItem>()
 				.AddIngredient<OmegaFragment>(15)
@@ -530,6 +554,7 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 			Projectile.friendly = true;
 			Projectile.minion = true;
 			Projectile.penetrate = -1;
+			Projectile.damage = 100000;
 			Projectile.timeLeft = 18000;
 			Projectile.ignoreWater = true;
 			Projectile.tileCollide = false;
@@ -559,6 +584,172 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 			if (Projectile.velocity.X != oldVelocity.X) Projectile.velocity.X = oldVelocity.X;
 			if (Projectile.velocity.Y != oldVelocity.Y) Projectile.velocity.Y = oldVelocity.Y;
 			return false;
+		}
+    }
+
+	public class GodSlayerBarrage : ModProjectile
+	{
+        public override string Texture => RecolorUtils.none;
+        public override void SetStaticDefaults()
+		{
+			DisplayName.SetDefault("God Slayer Barrage");
+			ProjectileID.Sets.TrailCacheLength[Projectile.type] = 2;
+			ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+		}
+
+		public override void SetDefaults()
+		{
+			Projectile.width = 11;
+			Projectile.height = 11;
+			Projectile.hostile = false;
+			Projectile.friendly = true;
+			Projectile.damage = 100000;
+			Projectile.ignoreWater = true;
+			Projectile.tileCollide = false;
+			Projectile.penetrate = -1;
+			Projectile.timeLeft = 690;
+		}
+
+		public override void SendExtraAI(BinaryWriter writer)
+		{
+			writer.Write(Projectile.localAI[0]);
+		}
+
+		public override void ReceiveExtraAI(BinaryReader reader)
+		{
+			Projectile.localAI[0] = reader.ReadSingle();
+		}
+
+		public override void AI()
+		{
+			Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, 0f, 0f, 50);
+			if (Projectile.velocity.Length() < ((Projectile.ai[1] == 0f) ? 14f : 10f))
+			{
+				Projectile.velocity *= 2.02f;
+			}
+			Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2f;
+			if (Projectile.timeLeft < 60)
+			{
+				Projectile.Opacity = MathHelper.Clamp((float)Projectile.timeLeft / 60f, 0f, 1f);
+			}
+			if (Projectile.localAI[0] == 0f)
+			{
+				Projectile.localAI[0] = 1f;
+			}
+			Lighting.AddLight(Projectile.Center, 0.75f, 0f, 0f);
+		}
+
+		public override bool CanHitPlayer(Player target)
+		{
+			return Projectile.Opacity == 1f;
+		}
+	}
+
+	public class GodSlayerGigaBlast : ModProjectile
+	{
+		public override string Texture => RecolorUtils.none;
+		public override void SetStaticDefaults()
+		{
+			DisplayName.SetDefault("Brimstone Fireblast");
+			Main.projFrames[Projectile.type] = 5;
+		}
+
+		public override void SetDefaults()
+		{
+			Projectile.width = 36;
+			Projectile.height = 36;
+			Projectile.hostile = false;
+			Projectile.friendly = true;
+			Projectile.damage = 100000;
+			Projectile.ignoreWater = true;
+			Projectile.penetrate = 1;
+			Projectile.Opacity = 0f;
+			Projectile.timeLeft = 150;
+		}
+
+		public override void AI()
+		{
+			Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, 0f, 0f, 50);
+			Lighting.AddLight(Projectile.Center, (float)(255 - Projectile.alpha) * 0.9f / 255f, 0f, 0f);
+			if (Projectile.ai[1] == 1f)
+			{
+				Projectile.Opacity = MathHelper.Clamp((float)Projectile.timeLeft / 60f, 0f, 1f);
+			}
+			else
+			{
+				Projectile.Opacity = MathHelper.Clamp(1f - (float)(Projectile.timeLeft - 90) / 60f, 0f, 1f);
+			}
+			Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2f;
+			if (Projectile.localAI[0] == 0f)
+			{
+				Projectile.localAI[0] = 1f;
+				Terraria.Audio.SoundEngine.PlaySound(2, (int)Projectile.position.X, (int)Projectile.position.Y, 20, 1f, 0f);
+			}
+			float inertia = (Main.getGoodWorld ? 80f : 100f);
+			float homeSpeed = (Main.getGoodWorld ? 20f : 15f);
+			float minDist = 40f;
+			int target = (int)Projectile.ai[0];
+			if (target >= 0 && Main.npc[target].active)
+			{
+				if (Projectile.Distance(Main.player[target].Center) > minDist)
+				{
+					Vector2 targetVec = Projectile.DirectionTo(Main.player[target].Center);
+					if (targetVec.HasNaNs())
+					{
+						targetVec = Vector2.UnitY;
+					}
+					Projectile.velocity = (Projectile.velocity * (inertia - 1f) + targetVec * homeSpeed) / inertia;
+				}
+			}
+			else if (Projectile.ai[0] != -1f)
+			{
+				Projectile.ai[0] = -1f;
+				Projectile.netUpdate = true;
+			}
+		}
+
+		public override bool PreDraw(ref Color lightColor)
+		{
+			Texture2D texture = (Texture2D)TextureAssets.Projectile[Projectile.type];
+			int frameHeight = texture.Height / Main.projFrames[Projectile.type];
+			int drawStart = frameHeight * Projectile.frame;
+			lightColor.R = (byte)(255f * Projectile.Opacity);
+			Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle(0, drawStart, texture.Width, frameHeight), Projectile.GetAlpha(lightColor), Projectile.rotation, new Vector2((float)texture.Width / 2f, (float)frameHeight / 2f), Projectile.scale, SpriteEffects.None, 0f);
+			return false;
+		}
+
+		public override bool CanHitPlayer(Player target)
+		{
+			return Projectile.Opacity == 1f;
+		}
+
+		public override void Kill(int timeLeft)
+		{
+			if (Projectile.ai[1] == 0f)
+			{
+				float spread = (float)Math.PI * 9f / 40f;
+				double startAngle = Math.Atan2(Projectile.velocity.X, Projectile.velocity.Y) - (double)(spread / 2f);
+				double deltaAngle = spread / 8f;
+				if (Projectile.owner == Main.myPlayer)
+				{
+					for (int i = 0; i < 8; i++)
+					{
+						double offsetAngle = startAngle + deltaAngle * (double)(i + i * i) / 2.0 + (double)(32f * (float)i);
+						Projectile.NewProjectile(Projectile.GetNoneSource(), Projectile.Center.X, Projectile.Center.Y, (float)(Math.Sin(offsetAngle) * 7.0), (float)(Math.Cos(offsetAngle) * 7.0), ModContent.ProjectileType<GodSlayerBarrage>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 1f);
+						Projectile.NewProjectile(Projectile.GetNoneSource(), Projectile.Center.X, Projectile.Center.Y, (float)((0.0 - Math.Sin(offsetAngle)) * 7.0), (float)((0.0 - Math.Cos(offsetAngle)) * 7.0), ModContent.ProjectileType<GodSlayerBarrage>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 1f);
+					}
+				}
+			}
+			Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, 0f, 0f, 50);
+			for (int j = 0; j < 10; j++)
+			{
+				int redFire = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, 0f, 0f, 0, default(Color), 1.5f);
+				Main.dust[redFire].noGravity = true;
+				Main.dust[redFire].velocity *= 3f;
+				redFire = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, 0f, 0f, 50);
+				Main.dust[redFire].velocity *= 2f;
+				Main.dust[redFire].noGravity = true;
+			}
 		}
 	}
 }
