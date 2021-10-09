@@ -6,6 +6,8 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ModLoader.Utilities;
 using Microsoft.Xna.Framework;
 using System;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent;
 
 namespace RecolorMod.NPCs
 {
