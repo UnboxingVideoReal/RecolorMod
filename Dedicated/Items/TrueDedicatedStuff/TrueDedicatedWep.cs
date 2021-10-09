@@ -589,10 +589,10 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 
 	public class GodSlayerBarrage : ModProjectile
 	{
-        public override string Texture => RecolorUtils.none;
         public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("God Slayer Barrage");
+			Main.projFrames[Projectile.type] = 4;
 			ProjectileID.Sets.TrailCacheLength[Projectile.type] = 2;
 			ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
 		}
@@ -628,6 +628,16 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 				Projectile.velocity *= 2.02f;
 			}
 			Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2f;
+			Projectile.frameCounter++;
+			if (Projectile.frameCounter > 4)
+			{
+				Projectile.frame++;
+				Projectile.frameCounter = 0;
+			}
+			if (Projectile.frame > 3)
+			{
+				Projectile.frame = 0;
+			}
 			if (Projectile.timeLeft < 60)
 			{
 				Projectile.Opacity = MathHelper.Clamp((float)Projectile.timeLeft / 60f, 0f, 1f);
@@ -647,10 +657,9 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 
 	public class GodSlayerGigaBlast : ModProjectile
 	{
-		public override string Texture => RecolorUtils.none;
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Brimstone Fireblast");
+			DisplayName.SetDefault("Godslayer Fireblast");
 			Main.projFrames[Projectile.type] = 5;
 		}
 
@@ -669,6 +678,16 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 
 		public override void AI()
 		{
+			Projectile.frameCounter++;
+			if (Projectile.frameCounter > 4)
+			{
+				Projectile.frame++;
+				Projectile.frameCounter = 0;
+			}
+			if (Projectile.frame >= 5)
+			{
+				Projectile.frame = 0;
+			}
 			Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, 0f, 0f, 50);
 			Lighting.AddLight(Projectile.Center, (float)(255 - Projectile.alpha) * 0.9f / 255f, 0f, 0f);
 			if (Projectile.ai[1] == 1f)
@@ -732,7 +751,7 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 				double deltaAngle = spread / 8f;
 				if (Projectile.owner == Main.myPlayer)
 				{
-					for (int i = 0; i < 8; i++)
+					for (int i = 0; i < 10; i++)
 					{
 						double offsetAngle = startAngle + deltaAngle * (double)(i + i * i) / 2.0 + (double)(32f * (float)i);
 						Projectile.NewProjectile(Projectile.GetNoneSource(), Projectile.Center.X, Projectile.Center.Y, (float)(Math.Sin(offsetAngle) * 7.0), (float)(Math.Cos(offsetAngle) * 7.0), ModContent.ProjectileType<GodSlayerBarrage>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 1f);
