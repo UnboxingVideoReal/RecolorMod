@@ -191,6 +191,8 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 				.AddIngredient<Aquamarine>(15)
 				.AddIngredient<UnboxingEssence>(15)
 				.AddIngredient<GeoStuff.Geobliterator>()
+				.AddIngredient<BambiPenetrator>()
+				.AddIngredient<phone>()
 				.AddIngredient<QuibopStuff.QuibopKnife>()
 				.AddIngredient<TorraStuff.StarKey>()
 				//.AddIngredient<GungaStuff.GunGa>()

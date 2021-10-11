@@ -16,16 +16,16 @@ namespace RecolorMod
 	public class RecolorMod : Mod
 	{
 		public static RecolorMod ModInstance;
+		public static Effect GreenScreenFog;
+		public static Texture2D GreenSky;
 		public RecolorMod()
 		{
 			ModInstance = this;
 		}
 		public override void Load()
 		{
-			Ref<Effect> textRef = new Ref<Effect>((Effect)ModInstance.Assets.Request<Effect>("Effects/TextShader"));
 			Main.versionNumber = $"Terraria v1.4.1.2\nRecolor Mod v{ModLoader.GetMod("RecolorMod").Version}";
-			GameShaders.Misc["PulseCircle"] = new MiscShaderData(textRef, "PulseCircle");
-			Filters.Scene["MyFilter"].GetShader().UseColor(0f, 1f, 0f);
+
 		}
 	}
 }

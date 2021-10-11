@@ -1,21 +1,10 @@
 this mod adds stuff
 
-more specifically:
-
-1 mount
-9 rarities
-1 wall
-13 tiles
-22 projectiles
-10 enemies
-1 new class thing
-2 buffs
-46 items
-1 unfinished biome
-
 credits:
 
 blasfah for blahr sprite (totally
+torra th for dave and bambi's sprites
+moldygh for epic
 my brain ig
 everyone with a dedicated item
 calamity, fargo's souls, and qwerty's for some code

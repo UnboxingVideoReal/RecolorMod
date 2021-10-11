@@ -15,14 +15,14 @@ using System.IO;
 namespace RecolorMod.NPCs
 {
 	[AutoloadBossHead]
-	public class BambiBoss : ModNPC
+	public class DaveBoss : ModNPC
 	{
 		public bool secondPhase;
 		public static int secondPhaseHead = -1;
 		public ref float AI_Timer => ref NPC.ai[1];
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("bambi");
+			DisplayName.SetDefault("dave");
 		}
 
 		public override void Load()
@@ -42,7 +42,7 @@ namespace RecolorMod.NPCs
 		public override void SetDefaults()
 		{
 			NPC.width = 40;
-			NPC.height = 46;
+			NPC.height = 64;
 			NPC.damage = int.MaxValue - 1;
 			NPC.defense = int.MaxValue - 1;
 			NPC.lifeMax = 9999999;
@@ -70,8 +70,7 @@ namespace RecolorMod.NPCs
 						var num627 = 12f;
 						var vector71 = new Vector2(NPC.position.X + NPC.width * 0.5f, NPC.position.Y + NPC.height / 2);
 						var num628 = 100;
-						int num700 = ModContent.ProjectileType<BambiBarrage>();
-						Projectile.NewProjectile(Projectile.GetNoneSource(), NPC.Center.X, NPC.Center.Y, 0f, -1f, ModContent.ProjectileType<Phone>(), NPC.damage, 5f);
+						int num700 = ModContent.ProjectileType<DaveBarrage>();
 						//Terraria.Audio.SoundEngine.PlaySound(SoundID., (int)NPC.position.X, (int)NPC.position.Y, 33);
 						var num630 = (float)Math.Atan2(vector71.Y - (Main.player[NPC.target].position.Y + Main.player[NPC.target].height * 0.5f), vector71.X - (Main.player[NPC.target].position.X + Main.player[NPC.target].width * 0.5f));
 						for (var num631 = 0f; num631 <= 4f; num631 += 0.4f)
@@ -87,7 +86,7 @@ namespace RecolorMod.NPCs
 						AI_Timer = 0f;
 						return;
 					}
-					Projectile.NewProjectile(Projectile.GetNoneSource(), NPC.Center.X, NPC.Center.Y, 0f, -1f, ModContent.ProjectileType<BambiBlastNoExplode>(), NPC.damage, 5f);
+					Projectile.NewProjectile(Projectile.GetNoneSource(), NPC.Center.X, NPC.Center.Y, 0f, -1f, ModContent.ProjectileType<DaveBlastNoExplode>(), NPC.damage, 5f);
 				}
 			}
 			else if (NPC.life <= NPC.lifeMax / 2)
@@ -99,8 +98,7 @@ namespace RecolorMod.NPCs
 					var num627 = 12f;
 					var vector71 = new Vector2(NPC.position.X + NPC.width * 0.5f, NPC.position.Y + NPC.height / 2);
 					var num628 = 100;
-					int num700 = ModContent.ProjectileType<BambiBarrage>();
-					Projectile.NewProjectile(Projectile.GetNoneSource(), NPC.Center.X, NPC.Center.Y, 0f, -1f, ModContent.ProjectileType<Phone>(), NPC.damage, 5f);
+					int num700 = ModContent.ProjectileType<DaveBarrage>();
 					//Terraria.Audio.SoundEngine.PlaySound(SoundID., (int)NPC.position.X, (int)NPC.position.Y, 33);
 					var num630 = (float)Math.Atan2(vector71.Y - (Main.player[NPC.target].position.Y + Main.player[NPC.target].height * 0.5f), vector71.X - (Main.player[NPC.target].position.X + Main.player[NPC.target].width * 0.5f));
 					for (var num631 = 0f; num631 <= 4f; num631 += 0.4f)
@@ -115,7 +113,7 @@ namespace RecolorMod.NPCs
 					AI_Timer = 0f;
 					return;
 				}
-				Projectile.NewProjectile(Projectile.GetNoneSource(), NPC.Center.X, NPC.Center.Y, 0f, -1f, ModContent.ProjectileType<BambiBlast>(), NPC.damage, 5f);
+				Projectile.NewProjectile(Projectile.GetNoneSource(), NPC.Center.X, NPC.Center.Y, 0f, -1f, ModContent.ProjectileType<DaveBlast>(), NPC.damage, 5f);
 			}
 		}
 
@@ -128,7 +126,7 @@ namespace RecolorMod.NPCs
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-			Texture2D texture2D15 = (Texture2D)ModContent.Request<Texture2D>("RecolorMod/NPCs/BambiBoss");
+			Texture2D texture2D15 = (Texture2D)ModContent.Request<Texture2D>("RecolorMod/NPCs/DaveBoss");
 			SpriteEffects spriteEffects = SpriteEffects.None;
 			if (NPC.spriteDirection == 1)
 			{
@@ -136,11 +134,11 @@ namespace RecolorMod.NPCs
 			}
 			if (secondPhase)
             {
-				texture2D15 = (Texture2D)ModContent.Request<Texture2D>("RecolorMod/NPCs/BambiBoss2");
+				texture2D15 = (Texture2D)ModContent.Request<Texture2D>("RecolorMod/NPCs/DaveBoss2");
 			}
 			else
             {
-				texture2D15 = (Texture2D)ModContent.Request<Texture2D>("RecolorMod/NPCs/BambiBoss");
+				texture2D15 = (Texture2D)ModContent.Request<Texture2D>("RecolorMod/NPCs/DaveBoss");
 			}
 			Vector2 vector11 = new Vector2(TextureAssets.Npc[NPC.type].Width() / 2, TextureAssets.Npc[NPC.type].Height() / 2);
 			Color color36 = Color.White;
@@ -154,11 +152,11 @@ namespace RecolorMod.NPCs
         }
     }
 
-	public class BambiBlast : ModProjectile
+	public class DaveBlast : ModProjectile
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("bambi blast");
+			DisplayName.SetDefault("dave blast");
 			Main.projFrames[Projectile.type] = 5;
 		}
 
@@ -271,12 +269,12 @@ namespace RecolorMod.NPCs
 		}
 	}
 
-	public class BambiBlastNoExplode : ModProjectile
+	public class DaveBlastNoExplode : ModProjectile
 	{
-        public override string Texture => ModContent.GetInstance<BambiBlast>().Texture; 
+        public override string Texture => ModContent.GetInstance<DaveBlast>().Texture; 
         public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("bambi blast");
+			DisplayName.SetDefault("dave blast");
 			Main.projFrames[Projectile.type] = 5;
 		}
 
@@ -389,11 +387,11 @@ namespace RecolorMod.NPCs
 		//}
 	}
 
-	public class BambiBarrage : ModProjectile
+	public class DaveBarrage : ModProjectile
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("bambi barrage");
+			DisplayName.SetDefault("dave barrage");
 			Main.projFrames[Projectile.type] = 4;
 			ProjectileID.Sets.TrailCacheLength[Projectile.type] = 2;
 			ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
@@ -454,42 +452,6 @@ namespace RecolorMod.NPCs
 		public override bool CanHitPlayer(Player target)
 		{
 			return Projectile.Opacity == 1f;
-		}
-	}
-
-	public class Phone : ModProjectile
-	{
-		public override void SetDefaults()
-		{
-			Projectile.netImportant = true;
-			//Projectile.CloneDefaults(ProjectileID.DeadlySphere);
-			//AIType = ProjAIStyleID.PhantasmalEye;
-			Projectile.width = 62;
-			Projectile.height = 82;
-			Projectile.friendly = false;
-			Projectile.hostile = true;
-			Projectile.penetrate = -1;
-			Projectile.damage = 9000000;
-			Projectile.timeLeft = 18000;
-			Projectile.ignoreWater = true;
-			Projectile.tileCollide = false;
-		}
-
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("phone");
-		}
-
-		public override void AI()
-		{
-			ModContent.GetInstance<Projectiles.WaterFireball>().AI();
-		}
-
-		public override bool OnTileCollide(Vector2 oldVelocity)
-		{
-			if (Projectile.velocity.X != oldVelocity.X) Projectile.velocity.X = oldVelocity.X;
-			if (Projectile.velocity.Y != oldVelocity.Y) Projectile.velocity.Y = oldVelocity.Y;
-			return false;
 		}
 	}
 }
