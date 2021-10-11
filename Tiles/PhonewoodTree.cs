@@ -18,7 +18,7 @@ namespace RecolorMod.Tiles
 
         public override int DropWood()
         {
-            return ModContent.ItemType<Items.phone>();
+            return ModContent.ItemType<Items.Phonewood>();
         }
 
         public override Texture2D GetTexture()
