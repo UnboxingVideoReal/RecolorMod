@@ -34,11 +34,7 @@ namespace RecolorMod.NPCs
 			AnimationType = NPCID.Spazmatism;
 			AIType = -1; // Use vanilla zombie's type when executing AI code. (This also means it will try to despawn during daytime) // Use vanilla zombie's type when executing animation code. Important to also match Main.npcFrameCount[NPC.type] in SetStaticDefaults.
 		}
-        public bool SecondStage
-        {
-            get => NPC.ai[3] == 100f;
-            set => NPC.ai[3] = value ? 100f : 0f;
-        }
+        public bool SecondStage = false;
 
         public override void Load()
         {
@@ -378,6 +374,7 @@ namespace RecolorMod.NPCs
             }
             else
             {
+                SecondStage = true;
                 NPC.HitSound = SoundID.NPCHit4;
                 NPC.damage = (int)(NPC.defDamage * 1.5);
                 NPC.defense = NPC.defDefense + 10;

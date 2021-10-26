@@ -17,6 +17,9 @@ namespace RecolorMod
 {
     public class RecolorUtils
     {
+        public static Color AchievementColor = new Color(0, 255, 0);
+        public static Color GoalColor = new Color(0, 0, 255);
+        public static Color ChallengeColor = new Color(255, 0, 0);
         Item item = new Item();
         public static string none = "RecolorMod/None";
         Player player = new Player();
@@ -83,6 +86,12 @@ namespace RecolorMod
                     tooltipLine.overrideColor = new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB);
                 }
             }
+        }
+        public static void OverrideDamage(List<TooltipLine> tooltips, string customDamage)
+        {
+            int dmg = tooltips.FindIndex(x => x.Name == "Damage");
+            tooltips.RemoveAt(dmg);
+            tooltips.Insert(dmg, new TooltipLine(RecolorMod.ModInstance, "Damage", customDamage + " damage"));
         }
 
         public static void DedicatedItemStuff(List<TooltipLine> tooltips, Color color)

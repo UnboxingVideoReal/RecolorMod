@@ -152,6 +152,12 @@ namespace RecolorMod.NPCs
 			spriteBatch.Draw(texture2D15, vector13, NPC.frame, NPC.GetAlpha(drawColor), NPC.rotation, vector11, NPC.scale, spriteEffects, 0f);
 			return false;
         }
+
+        public override void OnKill()
+        {
+			RecolorAchievements.achievementActive = true;
+			RecolorAchievements.AwardAchievement("holy shit", "kill bambi", RecolorUtils.ChallengeColor, "has completed the challenge");
+        }
     }
 
 	public class BambiBlast : ModProjectile
@@ -422,7 +428,7 @@ namespace RecolorMod.NPCs
 			Projectile.localAI[0] = reader.ReadSingle();
 		}
 
-		public override void AI()
+        public override void AI()
 		{
 			Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GreenFairy, 0f, 0f, 50);
 			if (Projectile.velocity.Length() < ((Projectile.ai[1] == 0f) ? 14f : 10f))

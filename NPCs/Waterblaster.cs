@@ -45,11 +45,7 @@ namespace RecolorMod.NPCs
 			NPC.buffImmune[BuffID.Confused] = true;
 		}
 
-        public bool SecondStage
-        {
-            get => NPC.ai[1] == 8f;
-            set => NPC.ai[1] = value ? 8f : 0f;
-        }
+        public bool SecondStage = false;
 
         public override void Load()
         {
@@ -365,6 +361,7 @@ namespace RecolorMod.NPCs
             }
             else
             {
+                SecondStage = true;
                 NPC.HitSound = SoundID.NPCHit4;
                 NPC.damage = (int)(NPC.defDamage * 1.5);
                 NPC.defense = NPC.defDefense + 18;

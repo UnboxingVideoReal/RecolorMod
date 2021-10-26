@@ -9,6 +9,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using RecolorMod.Projectiles;
+using RecolorMod.Dedicated.Items.TrueDedicatedStuff;
 
 namespace RecolorMod
 {
@@ -19,12 +20,24 @@ namespace RecolorMod
         public static bool playerY;
         public static bool doItemStuff;
         public bool unboxingEnchInflicts;
+        public bool inflictsStarburn;
         public bool stopSpawningTheFuckingPets = true; 
         Player player = new Player();
         public bool gsInferno;
         public bool starburn;
         public bool UnboxingEffectBool;
+        public bool QuibopEnchantBool;
         public bool BismuthEffectBool;
+        public bool TorraEnchantBool;
+        public bool DoubleTap
+        {
+            get
+            {
+                return Main.ReversedUpDownArmorSetBonuses ?
+                    player.controlUp && player.releaseUp && player.doubleTapCardinalTimer[1] > 0 && player.doubleTapCardinalTimer[1] != 15
+                    : player.controlDown && player.releaseDown && player.doubleTapCardinalTimer[0] > 0 && player.doubleTapCardinalTimer[0] != 15;
+            }
+        }
         public bool PetsActive = true;
 
         public override void ResetEffects()
@@ -35,12 +48,30 @@ namespace RecolorMod
             gsInferno = false;
             starburn = false;
             unboxingEnchInflicts = false;
+            QuibopEnchantBool = false;
+            inflictsStarburn = false;
             UnboxingEffectBool = false;
             BismuthEffectBool = false;
+            TorraEnchantBool = false;
             stopSpawningTheFuckingPets = false;
             doItemStuff = false;
         }
+        public void TorraEnchant(Player player)
+        {
+            TorraEnchantBool = true;
 
+            if (Main.ReversedUpDownArmorSetBonuses ?
+                    player.controlUp && player.releaseUp && player.doubleTapCardinalTimer[1] > 0 && player.doubleTapCardinalTimer[1] != 15
+                    : player.controlDown && player.releaseDown && player.doubleTapCardinalTimer[0] > 0 && player.doubleTapCardinalTimer[0] != 15)
+            {
+                Vector2 mouse = Main.MouseWorld;
+
+                int heatray = Projectile.NewProjectile(Projectile.GetNoneSource(), player.Center, new Vector2(0, -6f), ProjectileID.HeatRay, 0, 0, Main.myPlayer);
+                Main.projectile[heatray].tileCollide = false;
+                //proj spawns arrows all around it until it dies
+                Projectile.NewProjectile(Projectile.GetNoneSource(), mouse.X, player.Center.Y - 500, 0f, 0f, ModContent.ProjectileType<StarRain>(), 5000, 0f, player.whoAmI, 0, player.direction);
+            }
+        }
         public override void UpdateDead()
         {
             gsInferno = false;
@@ -52,6 +83,10 @@ namespace RecolorMod
         public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
             if (gsInferno && damage == 10.0 && hitDirection == 0 && damageSource.SourceOtherIndex == 8)
+            {
+                damageSource = PlayerDeathReason.ByCustomReason(player.name + "'s soul was extinguished.");
+            }
+            if (starburn && damage == 10.0 && hitDirection == 0 && damageSource.SourceOtherIndex == 8)
             {
                 damageSource = PlayerDeathReason.ByCustomReason(player.name + "'s soul was extinguished.");
             }
@@ -68,6 +103,10 @@ namespace RecolorMod
                 RecolorUtils.Inflict246DebuffsNPC(npc, BuffID.OnFire);
                 RecolorUtils.Inflict246DebuffsNPC(npc, BuffID.Venom);
             }
+            if (inflictsStarburn)
+            {
+                RecolorUtils.Inflict246DebuffsNPC(npc, ModContent.BuffType<Starburn>());
+            }
         }
 
         public void BismuthEffect()
@@ -82,6 +121,22 @@ namespace RecolorMod
             //AddMinion(ModContent.ProjectileType<BismuthAxeSummon>(), (int)(dmg * player.GetDamage(DamageClass.Summon)), 0f);
             Projectile.NewProjectile(Projectile.GetNoneSource(), Player.Center.X, Player.Center.Y, 0f, -1f, ModContent.ProjectileType<BismuthAxeSummon>(), (int)(dmg * player.GetDamage(DamageClass.Summon)), 0f, Main.myPlayer);
 
+        }
+
+        public void BlahEnchant()
+        {
+            if (Main.ReversedUpDownArmorSetBonuses ?
+                    player.controlUp && player.releaseUp && player.doubleTapCardinalTimer[1] > 0 && player.doubleTapCardinalTimer[1] != 15
+                    : player.controlDown && player.releaseDown && player.doubleTapCardinalTimer[0] > 0 && player.doubleTapCardinalTimer[0] != 15)
+            {
+                int project = ModContent.ProjectileType<EnergyBlade>();
+                Projectile pro = Main.projectile[Projectile.NewProjectile(Projectile.GetNoneSource(), player.Center.X, player.Center.Y, 0f, -1f, project, 5000, 3f, Main.myPlayer)];
+                if (player.ownedProjectileCounts[project] > 0 && player.whoAmI == Main.myPlayer)
+                {
+                    pro.Kill();
+                }
+            }
+            
         }
 
         public void AddMinion(int proj, int damage, float knockback)
@@ -148,6 +203,41 @@ namespace RecolorMod
             //}
             //#endregion
         }
+
+        public void QuibopEnchant()
+        {
+            QuibopEnchantBool = true;
+            int currentOrbs = (Player.ownedProjectileCounts[ModContent.ProjectileType<QuibKnifeRotate>()]);
+            int max = 5;
+            if (currentOrbs == 0)
+            {
+                float rotation = (float)Math.PI * 2f / (float)max;
+                for (int k = 0; k < max; k++)
+                {
+                    int p2 = Projectile.NewProjectile(Projectile.GetNoneSource(), Player.Center + new Vector2(30f, 0f).RotatedBy(rotation * (float)k), Vector2.Zero, ModContent.ProjectileType<QuibKnifeRotate>(), 0, 10f, Player.whoAmI, 0f, rotation * (float)k);
+                }
+            }
+            else
+            {
+                if (currentOrbs == max)
+                {
+                    return;
+                }
+                for (int j = 0; j < 1000; j++)
+                {
+                    Projectile proj = Main.projectile[j];
+                    if (proj.active && proj.type == ModContent.ProjectileType<QuibKnifeRotate>() && proj.owner == Player.whoAmI)
+                    {
+                        proj.Kill();
+                    }
+                }
+                float rotation = (float)Math.PI * 2f / (float)max;
+                for (int i = 0; i < max; i++)
+                {
+                    int p = Projectile.NewProjectile(Projectile.GetNoneSource(), Player.Center + new Vector2(30f, 0f).RotatedBy(rotation * (float)i), Vector2.Zero, ModContent.ProjectileType<QuibKnifeRotate>(), 0, 10f, Player.whoAmI, 0f, rotation * (float)i);
+                }
+            }
+        }
         #region other stuff
         public void UnboxingOtherEffect()
         {
@@ -195,6 +285,72 @@ namespace RecolorMod
         {
             //RecolorUtils.GetRarities();
             RecolorUtils.stopTheFuckingSound = true;
+        }
+
+
+    }
+
+    public class StarRain : ModProjectile
+    {
+        private bool launchArrow = true;
+        public override string Texture => RecolorUtils.none;
+
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Star Rain");
+        }
+
+        public override void SetDefaults()
+        {
+            Projectile.width = 1;
+            Projectile.height = 1;
+            Projectile.friendly = true;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 250;
+        }
+
+        public override void AI()
+        {
+            Player owner = Main.player[Projectile.owner];
+
+            //follow the cursor and double fire rate with red riding
+            if (owner.GetModPlayer<RecolorPlayer>().TorraEnchantBool)
+            {
+                Projectile.Center = new Vector2(Main.MouseWorld.X, Main.MouseWorld.Y - 400);
+                //launchArrow = true;
+            }
+
+            //delay
+            if (Projectile.timeLeft > 220)
+            {
+                return;
+            }
+
+            if (launchArrow)
+            {
+                Vector2 position = new Vector2(Projectile.Center.X + Main.rand.Next(-100, 100), Projectile.Center.Y + Main.rand.Next(-75, 75));
+
+                float direction = Projectile.ai[1];
+                Vector2 velocity;
+
+                if (direction == 1)
+                {
+                    velocity = new Vector2(Main.rand.NextFloat(0, 2), Main.rand.NextFloat(20, 25));
+                }
+                else
+                {
+                    velocity = new Vector2(Main.rand.NextFloat(-2, 0), Main.rand.NextFloat(20, 25));
+                }
+
+                int p = Projectile.NewProjectile(Projectile.GetNoneSource(), position, velocity, ProjectileID.FallingStar, Projectile.damage, 0, Projectile.owner);
+                Main.projectile[p].noDropItem = true;
+
+                launchArrow = false;
+            }
+            else
+            {
+                launchArrow = true;
+            }
         }
     }
 }

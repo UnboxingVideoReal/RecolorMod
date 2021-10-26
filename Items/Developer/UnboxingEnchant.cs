@@ -33,7 +33,7 @@ namespace RecolorMod.Items.Developer
         {
             DisplayName.SetDefault("Unboxing's Enchantment");
             Tooltip.SetDefault(
-@$"'Very broken, go cry about it.'
+@$"'didn't ask'
 {ModContent.GetInstance<RecolorConfig>().prismOrbMax} Prism Orbs will orbit around you
 Summons a ring of bismuth crystals to shoot at nearby enemies
 +500% damage
