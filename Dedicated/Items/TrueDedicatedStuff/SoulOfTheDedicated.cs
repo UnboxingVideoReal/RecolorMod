@@ -24,7 +24,10 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
 			DisplayName.SetDefault("Soul of the Dedicated");
 			Tooltip.SetDefault($@"[i:{ModContent.ItemType<UnboxingEnchant>()}] Effects of Unboxing's Enchantment
 [i:{ModContent.ItemType<Enchants.QuibopEnchant>()}] 5 knives will orbit around you
-[i:{ModContent.ItemType<Enchants.BlahEnchant>()}] Double");
+[i:{ModContent.ItemType<Enchants.BlahEnchant>()}] Double tap up to
+[i:{ ModContent.ItemType<Enchants.TorraEnchant>()}] Double tap down to create a rain of stars that follows the cursor's position for a few seconds
+[i:{ ModContent.ItemType<Enchants.GeoEnchant>()}] Energy bolt will start to appear around you
+[i:{ ModContent.ItemType<Enchants.GungaEnchant>()}] Gunga Bombs will orbit around you");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1; // Configure the amount of this Item that's needed to research it in Journey mode.
 		}
 
@@ -60,8 +63,17 @@ namespace RecolorMod.Dedicated.Items.TrueDedicatedStuff
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
 			ModContent.GetInstance<Enchants.BlahEnchant>().UpdateAccessory(player, hideVisual);
+			ModContent.GetInstance<UnboxingEnchant>().UpdateAccessory(player, hideVisual);
 			ModContent.GetInstance<Enchants.TorraEnchant>().UpdateAccessory(player, hideVisual);
 			ModContent.GetInstance<Enchants.QuibopEnchant>().UpdateAccessory(player, hideVisual);
+			ModContent.GetInstance<Enchants.GeoEnchant>().UpdateAccessory(player, hideVisual);
+			ModContent.GetInstance<Enchants.GungaEnchant>().UpdateAccessory(player, hideVisual);
+			player.GetModPlayer<RecolorPlayer>().CheckForSoul();
+		}
+
+        public override void OnCraft(Recipe recipe)
+        {
+			RecolorAchievements.AwardAchievement("Sponsored by:", "Craft the Soul of The Dedicated", RecolorUtils.AchievementColor, "has made the achievement");
 		}
 
         public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)

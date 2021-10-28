@@ -18,6 +18,7 @@ namespace RecolorMod
     public class RecolorUtils
     {
         public static Color AchievementColor = new Color(0, 255, 0);
+        public static Color ClericColor = new Color(0, 255, 255);
         public static Color GoalColor = new Color(0, 0, 255);
         public static Color ChallengeColor = new Color(255, 0, 0);
         Item item = new Item();
@@ -34,7 +35,11 @@ namespace RecolorMod
                 stopTheFuckingSound = false;
             }
         }
-
+        public static void LargeNumberDisplay(NPC npc, int damage, Rectangle rect, Color color, string text)
+        {
+            npc.life -= damage;
+            CombatText.NewText(rect, color, text);
+        }
         public static float GetBulletRotation(Projectile projectile)
         {
             return projectile.rotation = (float)Math.Atan2(projectile.velocity.Y, projectile.velocity.X) + 1.57f;

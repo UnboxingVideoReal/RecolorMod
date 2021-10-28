@@ -26,9 +26,14 @@ namespace RecolorMod
         public bool gsInferno;
         public bool starburn;
         public bool UnboxingEffectBool;
+        public bool GeoEnchantBool;
         public bool QuibopEnchantBool;
         public bool BismuthEffectBool;
         public bool TorraEnchantBool;
+        public bool GungaEnchantBool;
+        public int BoltCount = 0;
+        private int boltCD = 0;
+        public bool SoulOfTheDedicatedBool;
         public bool DoubleTap
         {
             get
@@ -45,16 +50,24 @@ namespace RecolorMod
             playerPositionsOn = false;
             playerX = false;
             playerY = false;
+            GungaEnchantBool = false;
             gsInferno = false;
             starburn = false;
             unboxingEnchInflicts = false;
+            GeoEnchantBool = false;
             QuibopEnchantBool = false;
             inflictsStarburn = false;
             UnboxingEffectBool = false;
             BismuthEffectBool = false;
             TorraEnchantBool = false;
+            SoulOfTheDedicatedBool = false;
             stopSpawningTheFuckingPets = false;
             doItemStuff = false;
+        }
+
+        public void CheckForSoul()
+        {
+            SoulOfTheDedicatedBool = true;
         }
         public void TorraEnchant(Player player)
         {
@@ -71,6 +84,48 @@ namespace RecolorMod
                 //proj spawns arrows all around it until it dies
                 Projectile.NewProjectile(Projectile.GetNoneSource(), mouse.X, player.Center.Y - 500, 0f, 0f, ModContent.ProjectileType<StarRain>(), 5000, 0f, player.whoAmI, 0, player.direction);
             }
+        }
+
+        public void GeoEnchant(Player player)
+        {
+            GeoEnchantBool = true;
+            int currentOrbs = (Player.ownedProjectileCounts[ModContent.ProjectileType<GeoBolt>()]);
+            int max = 10;
+            if (currentOrbs == 0)
+            {
+                float rotation = (float)Math.PI * 2f / (float)max;
+                for (int k = 0; k < max; k++)
+                {
+                    int p2 = Projectile.NewProjectile(Projectile.GetNoneSource(), Player.Center + new Vector2(10f, 0f).RotatedBy(rotation * (float)k), Vector2.Zero, ModContent.ProjectileType<GeoBolt>(), 0, 10f, Player.whoAmI, 0f, rotation * (float)k);
+                }
+            }
+            else
+            {
+                if (currentOrbs == max)
+                {
+                    return;
+                }
+                for (int j = 0; j < 1000; j++)
+                {
+                    Projectile proj = Main.projectile[j];
+                    if (proj.active && proj.type == ModContent.ProjectileType<GeoBolt>() && proj.owner == Player.whoAmI)
+                    {
+                        proj.Kill();
+                    }
+                }
+                float rotation = (float)Math.PI * 2f / (float)max;
+                for (int i = 0; i < max; i++)
+                {
+                    int p = Projectile.NewProjectile(Projectile.GetNoneSource(), Player.Center + new Vector2(10f, 0f).RotatedBy(rotation * (float)i), Vector2.Zero, ModContent.ProjectileType<GeoBolt>(), 0, 10f, Player.whoAmI, 0f, rotation * (float)i);
+                }
+            }
+        }
+
+        public int HighestDamageTypeScaling(int dmg)
+        {
+            List<float> types = new List<float> { player.GetDamage(DamageClass.Melee), player.GetDamage(DamageClass.Magic), player.GetDamage(DamageClass.Ranged), player.GetDamage(DamageClass.Summon) };
+
+            return (int)(types.Max() * dmg);
         }
         public override void UpdateDead()
         {
@@ -154,6 +209,41 @@ namespace RecolorMod
             if (playerX && playerY)
                 playerPositionsOn = true;
         }
+
+        public void GungaEnchant()
+        {
+            GungaEnchantBool = true;
+            int currentOrbs = (Player.ownedProjectileCounts[ModContent.ProjectileType<GungaBomb>()]);
+            int max = 15;
+            if (currentOrbs == 0)
+            {
+                float rotation = (float)Math.PI * 2f / (float)max;
+                for (int k = 0; k < max; k++)
+                {
+                    int p2 = Projectile.NewProjectile(Projectile.GetNoneSource(), Player.Center + new Vector2(50f, 0f).RotatedBy(rotation * (float)k), Vector2.Zero, ModContent.ProjectileType<GungaBomb>(), 0, 10f, Player.whoAmI, 0f, rotation * (float)k);
+                }
+            }
+            else
+            {
+                if (currentOrbs == max)
+                {
+                    return;
+                }
+                for (int j = 0; j < 1000; j++)
+                {
+                    Projectile proj = Main.projectile[j];
+                    if (proj.active && proj.type == ModContent.ProjectileType<GungaBomb>() && proj.owner == Player.whoAmI)
+                    {
+                        proj.Kill();
+                    }
+                }
+                float rotation = (float)Math.PI * 2f / (float)max;
+                for (int i = 0; i < max; i++)
+                {
+                    int p = Projectile.NewProjectile(Projectile.GetNoneSource(), Player.Center + new Vector2(50f, 0f).RotatedBy(rotation * (float)i), Vector2.Zero, ModContent.ProjectileType<GungaBomb>(), 0, 10f, Player.whoAmI, 0f, rotation * (float)i);
+                }
+            }
+        }
         #region enchantment stuff here 
         public void UnboxingEffect()
         {
@@ -208,7 +298,11 @@ namespace RecolorMod
         {
             QuibopEnchantBool = true;
             int currentOrbs = (Player.ownedProjectileCounts[ModContent.ProjectileType<QuibKnifeRotate>()]);
-            int max = 5;
+            int max = 4;
+            if (SoulOfTheDedicatedBool)
+            {
+                max = 5;
+            }
             if (currentOrbs == 0)
             {
                 float rotation = (float)Math.PI * 2f / (float)max;
