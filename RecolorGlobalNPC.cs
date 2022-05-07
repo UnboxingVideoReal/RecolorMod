@@ -30,12 +30,14 @@ namespace RecolorMod
                 num285 = Main.maxTilesX * 0.2f;
                 var num287 = WorldGen.genRand.Next(0, Main.maxTilesX);
                 var num288 = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
-                while (Main.tile[num287, num288].type != 1)
+                while (Main.tile[num287, num288].TileType != 1)
                 {
                     num287 = WorldGen.genRand.Next(0, Main.maxTilesX);
                     num288 = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
                 }
                 RecolorUtils.GenerateOre(num287, num288, ModContent.GetInstance<RecolorConfig>().bismuthOreStrength/*WorldGen.genRand.Next(10, 20)*/, WorldGen.genRand.Next(3, 7), (ushort)type8);
+                RecolorUtils.GenerateOre(num287, num288, WorldGen.genRand.Next(16, 26), WorldGen.genRand.Next(6, 14), (ushort)ModContent.TileType<Tiles.CinnabarOre>());
+                RecolorUtils.GenerateOre(num287, num288, WorldGen.genRand.Next(11, 21), WorldGen.genRand.Next(6, 14), (ushort)ModContent.TileType<Tiles.Dropletium>());
                 //WorldGen.OreRunner(num287, num288, 250/*WorldGen.genRand.Next(10, 20)*/, WorldGen.genRand.Next(3, 7), (ushort)type8);
                 //RecolorUtils.DisplayLocalizedText("Your world has been blessed with Bismuth!", new Color(0, 0, 255));
             }
@@ -47,7 +49,7 @@ namespace RecolorMod
                 num285 = Main.maxTilesX * 0.2f;
                 var num287 = WorldGen.genRand.Next(0, Main.maxTilesX);
                 var num288 = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
-                while (Main.tile[num287, num288].type != 1)
+                while (Main.tile[num287, num288].TileType != 1)
                 {
                     num287 = WorldGen.genRand.Next(0, Main.maxTilesX);
                     num288 = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
@@ -64,7 +66,7 @@ namespace RecolorMod
                 num285 = Main.maxTilesX * 0.2f;
                 var num287 = WorldGen.genRand.Next(0, Main.maxTilesX);
                 var num288 = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
-                while (Main.tile[num287, num288].type != 1)
+                while (Main.tile[num287, num288].TileType != 1)
                 {
                     num287 = WorldGen.genRand.Next(0, Main.maxTilesX);
                     num288 = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
@@ -81,7 +83,7 @@ namespace RecolorMod
                 num285 = Main.maxTilesX * 0.2f;
                 var num287 = WorldGen.genRand.Next(0, Main.maxTilesX);
                 var num288 = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);
-                while (Main.tile[num287, num288].type != 1)
+                while (Main.tile[num287, num288].TileType != 1)
                 {
                     num287 = WorldGen.genRand.Next(0, Main.maxTilesX);
                     num288 = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY);

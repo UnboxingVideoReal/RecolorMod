@@ -33,10 +33,11 @@ namespace RecolorMod.NPCs
 		}
 
 		public override void ModifyNPCLoot(NPCLoot npcLoot) { 
-			npcLoot.Add(ItemDropRule.Common(ItemID.Gel));
-			npcLoot.Add(ItemDropRule.Common(ItemID.FragmentNebula));
-			npcLoot.Add(ItemDropRule.Common(ItemID.FragmentSolar));
-			npcLoot.Add(ItemDropRule.Common(ItemID.FragmentStardust));
+			npcLoot.Add(ItemDropRule.Common(ItemID.Gel, 1, 333, 590));
+			npcLoot.Add(ItemDropRule.Common(ItemID.FragmentNebula, 1, 33, 59));
+			npcLoot.Add(ItemDropRule.Common(ItemID.FragmentSolar, 1, 33, 59));
+			npcLoot.Add(ItemDropRule.Common(ItemID.FragmentStardust, 1, 33, 59));
+			npcLoot.Add(ItemDropRule.Common(ItemID.FragmentVortex, 1, 33, 59));
 		}
 
 		//public override float SpawnChance(NPCSpawnInfo spawnInfo) {

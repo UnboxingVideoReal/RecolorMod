@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;using System;using System.Collections.Generic;u
         {
             if (fail && !effectOnly)
             {
-                Main.tile[i, j].type = TileID.Dirt;
+                Main.tile[i, j].TileType = TileID.Dirt;
                 WorldGen.SquareTileFrame(i, j);
             }
         }

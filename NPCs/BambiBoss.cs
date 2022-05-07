@@ -158,7 +158,12 @@ namespace RecolorMod.NPCs
 			RecolorAchievements.achievementActive = true;
 			RecolorAchievements.AwardAchievement("holy shit", "kill bambi", RecolorUtils.ChallengeColor, "has completed the challenge");
         }
-    }
+
+		public override void ModifyNPCLoot(NPCLoot npcLoot)
+		{
+			npcLoot.Add(ItemDropRule.Common(ItemID.Gel, 1, 333, 590));
+		}
+	}
 
 	public class BambiBlast : ModProjectile
 	{

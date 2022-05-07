@@ -54,6 +54,7 @@ namespace RecolorMod.Dedicated.Items.TorraStuff
                 .AddIngredient(ItemID.DungeonDesertKey)
                 .AddIngredient(ItemID.TempleKey)
                 .AddIngredient(ItemID.FrozenKey)
+                .AddIngredient(ItemID.WoodenSword, 33)
                 .AddTile<BismuthForgeTile>()
                 .Register();
         }

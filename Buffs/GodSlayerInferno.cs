@@ -1,5 +1,6 @@
 ﻿using RecolorMod;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace RecolorMod.Buffs
@@ -16,7 +17,8 @@ namespace RecolorMod.Buffs
 			Main.debuff[Type] = true;
 			Main.pvpBuff[Type] = true;
 			Main.buffNoSave[Type] = true;
-			LongerExpertDebuff = false;
+			BuffID.Sets.LongerExpertDebuff[Type] = true;
+
 		}
 
 		public override void Update(Player player, ref int buffIndex)

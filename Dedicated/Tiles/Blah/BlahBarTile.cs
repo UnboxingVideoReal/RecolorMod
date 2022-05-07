@@ -25,7 +25,7 @@ namespace RecolorMod.Dedicated.Tiles.Blah
 
 		public override bool Drop(int i, int j) {
 			Tile t = Main.tile[i, j];
-			int style = t.frameX / 18;
+			int style = t.TileFrameX / 18;
 			if (style == 0) // It can be useful to share a single tile with multiple styles. This code will let you drop the appropriate bar if you had multiple.
 			{
 				Item.NewItem(i * 16, j * 16, 16, 16, ModContent.ItemType<Dedicated.Items.BlahStuff.BlahBar>());
@@ -56,7 +56,7 @@ namespace RecolorMod.Dedicated.Tiles.Blah
             {
                 zero = Vector2.Zero;
             }
-            Main.spriteBatch.Draw(texture, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, 16), Color.White, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(texture, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Color.White, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
 	}
 }

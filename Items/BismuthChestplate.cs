@@ -28,9 +28,7 @@ namespace RecolorMod.Items
 
 		public override void UpdateEquip(Player player)
 		{
-			player.buffImmune[BuffID.BrokenArmor] = true; // Make the player immune to Fire
 			player.statManaMax2 += 200; // Increase how many mana points the player can have by 20
-			player.panic = true; // Increase how many minions the player can have by one
 		}
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.

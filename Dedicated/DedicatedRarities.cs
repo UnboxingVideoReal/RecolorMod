@@ -49,4 +49,9 @@ namespace RecolorMod.Dedicated
             }
         }
     }
+
+	public class Blasfah : ModRarity
+	{
+		public override Color RarityColor => RecolorUtils.ColorSwap(new Color(0, 0, 0), new Color(100, 100, 100), 4f);
+	}
 }

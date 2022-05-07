@@ -96,7 +96,7 @@ namespace RecolorMod.Dedicated.Items.GeoStuff
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Geo Bullet"); // Name of the Projectile. It can be appear in chat
-            /*ProjectileID.Sets.CountsAsHoming[Projectile.type] = true;*/ // Tell the game that it is a homing Projectile
+            /*ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;*/ // Tell the game that it is a homing Projectile
         }
 
         // Setting the default parameters of the Projectile

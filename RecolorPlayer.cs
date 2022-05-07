@@ -185,7 +185,7 @@ namespace RecolorMod
                     : player.controlDown && player.releaseDown && player.doubleTapCardinalTimer[0] > 0 && player.doubleTapCardinalTimer[0] != 15)
             {
                 int project = ModContent.ProjectileType<EnergyBlade>();
-                Projectile pro = Main.projectile[Projectile.NewProjectile(Projectile.GetNoneSource(), player.Center.X, player.Center.Y, 0f, -1f, project, 5000, 3f, Main.myPlayer)];
+                Projectile pro = Main.projectile[Projectile.NewProjectile(Player.GetProjectileSource_Misc(project), player.Center.X, player.Center.Y, 0f, -1f, project, 5000, 3f, Main.myPlayer)];
                 if (player.ownedProjectileCounts[project] > 0 && player.whoAmI == Main.myPlayer)
                 {
                     pro.Kill();

@@ -13,7 +13,7 @@ namespace RecolorMod.Projectiles
 			DisplayName.SetDefault("Bismuth Crystal");
             Main.projPet[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
-            ProjectileID.Sets.CountsAsHoming[Projectile.type] = true;
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
 		public override void SetDefaults()

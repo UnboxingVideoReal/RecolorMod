@@ -10,11 +10,11 @@ namespace RecolorMod.Items{	public class phonegun : ModItem	{		public overri
 			RecolorUtils.OverrideDamage(tooltips, "32 trillion ranged");
         }
 
-        public override void SetDefaults()		{			Item.consumable = true;			Item.DamageType = DamageClass.Ranged;			Item.width = 42;			Item.damage = int.MaxValue - 2;			Item.useTime = 45;			Item.useStyle = 4;			Item.value = 0;			Item.maxStack = 20;			Item.useAnimation = 45;			Item.height = 48;			Item.rare = ModContent.RarityType<Rarities.Bambi>();        }        public override bool CanUseItem(Player player)        {
+        public override void SetDefaults()		{			Item.DamageType = DamageClass.Ranged;			Item.width = 42;			Item.damage = int.MaxValue - 2;			Item.useTime = 1;			Item.useStyle = 4;			Item.value = 0;			Item.autoReuse = true;  			Item.maxStack = 20;			Item.useAnimation = 1;			Item.height = 48;			Item.rare = ModContent.RarityType<Rarities.Bambi>();			Item.shootSpeed = 30f;			Item.shoot = ModContent.ProjectileType<Projectiles.BloodHoming>();        }        public override bool CanUseItem(Player player)        {
 				return !NPC.AnyNPCs(ModContent.NPCType<NPCs.BambiBoss>());        }
 
         public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
         {
-			RecolorUtils.LargeNumberDisplay(target, int.MaxValue - 2, target.targetRect, CombatText.DamagedFriendly, $"{Main.rand.Next(1, 16)} trillion");
+			RecolorUtils.LargeNumberDisplay(target, int.MaxValue - 2, target.targetRect, CombatText.OthersDamagedHostile, $"{Main.rand.Next(1, 16)} trillion");
 		}
     }}

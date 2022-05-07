@@ -16,7 +16,7 @@ namespace RecolorMod
 
 		public override string DisplayName => "Recolor Mod";
 
-		//public override ModSurfaceBackgroundStyle MenuBackgroundStyle => ModContent.GetInstance<Backgrounds.ContagionSurfaceBackgroundStyle>();
+		public override ModSurfaceBackgroundStyle MenuBackgroundStyle => ModContent.GetInstance<Backgrounds.BambiSurfaceBackgroundStyle>();
 
 		public override bool PreDrawLogo(SpriteBatch spriteBatch, ref Vector2 logoDrawCenter, ref float logoRotation, ref float logoScale, ref Color drawColor)
 		{
@@ -37,7 +37,7 @@ namespace RecolorMod
 
 		public override string DisplayName => "?";
 
-		//public override ModSurfaceBackgroundStyle MenuBackgroundStyle => ModContent.GetInstance<Backgrounds.ContagionSurfaceBackgroundStyle>();
+		public override ModSurfaceBackgroundStyle MenuBackgroundStyle => ModContent.GetInstance<Backgrounds.BambiSurfaceBackgroundStyle>();
 
 		public override bool PreDrawLogo(SpriteBatch spriteBatch, ref Vector2 logoDrawCenter, ref float logoRotation, ref float logoScale, ref Color drawColor)
 		{

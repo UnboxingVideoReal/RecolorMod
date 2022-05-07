@@ -29,6 +29,8 @@ namespace RecolorMod.NPCs
 			NPC.alpha = 0;
             NPC.value = 10000000f;
             NPC.color = Color.White;
+            NPC.width = 90;
+            NPC.height = 156;
 			NPC.defense = 300;
 			NPC.lifeMax = 2000000;
 			AnimationType = NPCID.Retinazer;

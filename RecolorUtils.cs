@@ -12,6 +12,8 @@ using Microsoft.Xna.Framework.Graphics;
 using RecolorMod.Items.Developer;
 using Terraria.Audio;
 using Terraria.Graphics.Shaders;
+using Terraria.Utilities;
+using Terraria.UI.Chat;
 
 namespace RecolorMod
 {
@@ -79,6 +81,11 @@ namespace RecolorMod
             {
                 target.AddBuff(buff, SecondsToFrames(timeBase));
             }
+        }
+
+        public static float Wave(float time, float minimum, float maximum)
+        {
+            return minimum + ((float)Math.Sin(time) + 1f) / 2f * (maximum - minimum);
         }
 
         public static void DedicatedItemStuff(List<TooltipLine> tooltips)
@@ -153,10 +160,10 @@ namespace RecolorMod
             {
                 zero = Vector2.Zero;
             }
-            Main.spriteBatch.Draw(texture, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, 16), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(texture, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 
             Texture2D texture2 = ModContent.Request<Texture2D>(texturePathDirt).Value;
-            Main.spriteBatch.Draw(texture2, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, 16), Color.White, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(texture2, new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Color.White, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
         }
 
         //public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
@@ -371,9 +378,9 @@ namespace RecolorMod
                             thirdColor,
                             fourthColor
                         };
-                int colorIndex2 = (int)(Main.GlobalTimeWrappedHourly / 2f % (float)colors.Count);
-                Color currentColor = colors[colorIndex2];
-                Color nextColor = colors[(colorIndex2 + 1) % colors.Count];
+            int colorIndex2 = (int)(Main.GlobalTimeWrappedHourly / 2f % (float)colors.Count);
+            Color currentColor = colors[colorIndex2];
+            Color nextColor = colors[(colorIndex2 + 1) % colors.Count];
             return Color.Lerp(currentColor, nextColor, (Main.GlobalTimeWrappedHourly % 2f > 1f) ? 1f : (Main.GlobalTimeWrappedHourly % 1f));
         }
 
@@ -401,24 +408,90 @@ namespace RecolorMod
             return Color.Lerp(value, nextColor, increment * (float)colors.Length % 1f);
         }
 
-        //public static Color ThreeColorSwap()
+        //public static void DrawNarrizuulText(DrawableTooltipLine line)
         //{
-        //    List<Color> colors = new List<Color>
-        //                {
-        //                    new Color(255, 99, 146),
-        //                    new Color(255, 228, 94),
-        //                    new Color(127, 200, 248)
-        //                };
-        //        int colorIndex2 = (int)(Main.GlobalTimeWrappedHourly / 2f % (float)colors.Count);
-        //        Color currentColor = colors[colorIndex2];
-        //        Color nextColor = colors[(colorIndex2 + 1) % colors.Count];
-        //        return Color.Lerp(currentColor, nextColor, (Main.GlobalTimeWrappedHourly % 2f > 1f) ? 1f : (Main.GlobalTimeWrappedHourly % 1f));
+        //    DrawNarrizuulText(line.text, line.X, line.Y, line.rotation, line.origin, line.baseScale, line.overrideColor.GetValueOrDefault(line.color));
         //}
 
-        //public void DrawItemGlowmaskSingleFrame(SpriteBatch spriteBatch, float rotation, Texture2D glowmaskTexture)
+        //public static void DrawNarrizuulText(string text, int x, int y, float rotation, Vector2 origin, Vector2 baseScale, Color color)
         //{
-        //    Item item = new Item();
-        //    spriteBatch.Draw(origin: new Vector2((float)glowmaskTexture.Width / 2f, (float)glowmaskTexture.Height / 2f - 2f), texture: glowmaskTexture, position: item.Center - Main.screenPosition, sourceRectangle: null, color: Color.White, rotation: rotation, scale: 1f, effects: SpriteEffects.None, layerDepth: 0f);
+        //    if (string.IsNullOrWhiteSpace(text)) // since you can rename items.
+        //    {
+        //        return;
+        //    }
+        //    var font = Terraria.Font;
+        //    var size = font.MeasureString(text);
+        //    var center = size / 2f;
+        //    var transparentColor = color * 0.4f;
+        //    transparentColor.A = 0;
+        //    var texture = AQTextures.Lights[LightTex.Spotlight12x66];
+        //    var spotlightOrigin = texture.Size() / 2f;
+        //    float spotlightRotation = rotation + MathHelper.PiOver2;
+        //    var spotlightScale = new Vector2(1.2f + (float)Math.Sin(Main.GlobalTime * 4f) * 0.145f, center.Y * 0.15f);
+
+        //    // black BG
+        //    Main.spriteBatch.Draw(texture, new Vector2(x, y - 6f) + center, null, Color.Black * 0.3f, rotation,
+        //    spotlightOrigin, new Vector2(size.X / texture.Width * 2f, center.Y / texture.Height * 2.5f), SpriteEffects.None, 0f);
+        //    ChatManager.DrawColorCodedStringShadow(Main.spriteBatch, font, text, new Vector2(x, y), Color.Black,
+        //        rotation, origin, baseScale);
+
+        //    // particles
+        //    var rand = new UnifiedRandom(Main.LocalPlayer.name.GetHashCode() + text.GetHashCode());
+        //    var particleTexture = AQTextures.Lights[LightTex.Spotlight15x15];
+        //    var particleOrigin = particleTexture.Size() / 2f;
+        //    int amt = rand.Next((int)size.X / 3, (int)size.X);
+        //    for (int i = 0; i < amt; i++)
+        //    {
+        //        float lifeTime = rand.NextFloat(20f);
+        //        int baseParticleX = rand.Next(4, (int)size.X - 4);
+        //        int particleX = baseParticleX + (int)RecolorUtils.Wave(lifeTime + Main.GlobalTimeWrappedHourly * rand.NextFloat(2f, 5f), -rand.NextFloat(3f, 10f), rand.NextFloat(3f, 10f));
+        //        lifeTime += Main.GlobalTimeWrappedHourly * 2f;
+        //        lifeTime %= 20f;
+        //        int particleY = rand.Next(10);
+        //        float scale = rand.NextFloat(0.2f, 0.4f);
+        //        if (baseParticleX > 14 && baseParticleX < size.X - 14 && rand.NextBool(6))
+        //        {
+        //            scale *= 2f;
+        //        }
+        //        if (lifeTime < 5f)
+        //        {
+        //            var clr = color;
+        //            if (lifeTime < 0.3f)
+        //            {
+        //                clr *= lifeTime / 0.3f;
+        //            }
+        //            if (lifeTime > MathHelper.PiOver2)
+        //            {
+        //                float timeMult = (lifeTime - MathHelper.PiOver2) / MathHelper.PiOver2;
+        //                scale -= timeMult * 0.4f;
+        //                if (scale < 0f)
+        //                {
+        //                    continue;
+        //                }
+
+
+        //                //public static Color ThreeColorSwap()
+        //                //{
+        //                //    List<Color> colors = new List<Color>
+        //                //                {
+        //                //                    new Color(255, 99, 146),
+        //                //                    new Color(255, 228, 94),
+        //                //                    new Color(127, 200, 248)
+        //                //                };
+        //                //        int colorIndex2 = (int)(Main.GlobalTimeWrappedHourly / 2f % (float)colors.Count);
+        //                //        Color currentColor = colors[colorIndex2];
+        //                //        Color nextColor = colors[(colorIndex2 + 1) % colors.Count];
+        //                //        return Color.Lerp(currentColor, nextColor, (Main.GlobalTimeWrappedHourly % 2f > 1f) ? 1f : (Main.GlobalTimeWrappedHourly % 1f));
+        //                //}
+
+        //                //public void DrawItemGlowmaskSingleFrame(SpriteBatch spriteBatch, float rotation, Texture2D glowmaskTexture)
+        //                //{
+        //                //    Item item = new Item();
+        //                //    spriteBatch.Draw(origin: new Vector2((float)glowmaskTexture.Width / 2f, (float)glowmaskTexture.Height / 2f - 2f), texture: glowmaskTexture, position: item.Center - Main.screenPosition, sourceRectangle: null, color: Color.White, rotation: rotation, scale: 1f, effects: SpriteEffects.None, layerDepth: 0f);
+        //                //}
+        //            }
+        //        }
+        //    }
         //}
     }
 }

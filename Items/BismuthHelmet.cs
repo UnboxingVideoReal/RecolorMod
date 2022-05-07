@@ -34,14 +34,7 @@ namespace RecolorMod.Items
 		// UpdateArmorSet allows you to give set bonuses to the armor.
 		public override void UpdateArmorSet(Player player)
 		{
-			NPC npc = new NPC();
-			player.setBonus = "Summons a baby skeletron head to follow you around\nIncreases damage by 20%\nAll bosses are inflicted with ichor"; // This is the setbonus tooltip
 			player.GetDamage(DamageClass.Generic) += 0.2f;
-			player.AddBuff(BuffID.BabySkeletronHead, 1);
-            if (npc.boss)
-            {
-                npc.ichor = true;
-            }
         }
 
 		public override void UpdateEquip(Player player)

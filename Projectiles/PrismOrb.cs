@@ -28,7 +28,7 @@ namespace RecolorMod.Projectiles
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
-            ProjectileID.Sets.CountsAsHoming[Projectile.type] = true;
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
 
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
